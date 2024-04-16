@@ -1,0 +1,24 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block section %}
+    <div class="container">
+        <h1 class="my-4">Terrains par Sport</h1>
+        <div class="row">
+            {% for terrain in terrains %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ terrain.nomterrain }}</h5>
+                            <p class="card-text">Localisation: {{ terrain.localisation }}</p>
+                            <p class="card-text">Taille: {{ terrain.taille }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col">
+                    <p>Aucun enregistrement trouvé</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

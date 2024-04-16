@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CategorieProduit{% endblock %}
+
+{% block body %}
+    <h1>CategorieProduit</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categorie_produit in categorie_produits %}
+                <tr>
+                    <td>{{ categorie_produit.nom }}</td>
+                    <td>
+                        <a href="{{ path('app_categorie_produit_show', {'id': categorie_produit.id}) }}" class="btn btn-primary">Show</a>
+                        <a href="{{ path('app_categorie_produit_edit', {'id': categorie_produit.id}) }}" class="btn btn-info">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">No records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categorie_produit_new') }}" class="btn btn-success">Create New</a>
+{% endblock %}
