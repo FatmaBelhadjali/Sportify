@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Affiliation{% endblock %}
+
+{% block body %}
+    <h1>Create new Affiliation</h1>
+
+    {{ include('affiliation/_form.html.twig') }}
+
+    <a href="{{ path('app_affiliation_index') }}">back to list</a>
+{% endblock %}

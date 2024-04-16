@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+{% block body %}
+    <h1>Produit index</h1>
+
+    <div class="row">
+        {% for produit in produits %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <a href="{{ path('app_produit_show', {'id': produit.id}) }}">
+                    <img src="{{ asset(produit.image) }}" alt="Product Image" class="card-img-top" width="100" height="100">
+                </a>
+            </div>
+        {% else %}
+            <div class="col">
+                <p>No records found</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <a href="{{ path('app_produit_new') }}" class="btn btn-success">Create New</a>
+{% endblock %}

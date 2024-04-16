@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipements{% endblock %}
+
+{% block body %}
+    <h1>Equipements</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nomequipement</th>
+                <th>Qteequipement</th>
+                <th>Imageequipement</th>
+                <th>ClubId</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for equipement in equipements %}
+            <tr>
+                <td>{{ equipement.id }}</td>
+                <td>{{ equipement.nomequipement }}</td>
+                <td>{{ equipement.qteequipement }}</td>
+                <td>{{ equipement.imageequipement }}</td>
+                <td>{{ equipement.clubId }}</td>
+                <td>
+                    <a href="{{ path('app_equipement_show', {'id': equipement.id}) }}">show</a>
+                    <a href="{{ path('app_equipement_edit', {'id': equipement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_equipement_new') }}">Create new</a>
+{% endblock %}

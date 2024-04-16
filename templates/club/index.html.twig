@@ -1,0 +1,49 @@
+{% extends 'Front_Office/clubs.html.twig' %}
+
+{% block title %}Clubs{% endblock %}
+
+{% block body %}
+    <h1>Clubs</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nomclub</th>
+                <th>Categorie</th>
+                <th>Datecreation</th>
+                <th>Nomcoach</th>
+                <th>Nbmembres</th>
+                <th>Localisation</th>
+                <th>Descriptionclub</th>
+                <th>Logo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for club in clubs %}
+            <tr>
+                <td>{{ club.id }}</td>
+                <td>{{ club.nomclub }}</td>
+                <td>{{ club.categorie }}</td>
+                <td>{{ club.datecreation }}</td>
+                <td>{{ club.nomcoach }}</td>
+                <td>{{ club.nbmembres }}</td>
+                <td>{{ club.localisation }}</td>
+                <td>{{ club.descriptionclub }}</td>
+                <td>{{ club.logo }}</td>
+                <td>
+                    <a href="{{ path('app_club_show', {'id': club.id}) }}">show</a>
+                    <a href="{{ path('app_club_edit', {'id': club.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_club_new') }}">Create new</a>
+{% endblock %}

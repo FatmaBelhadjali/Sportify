@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Affiliation{% endblock %}
+
+{% block body %}
+    <h1>Affiliation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ affiliation.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ affiliation.nom }}</td>
+            </tr>
+            <tr>
+                <th>Cin</th>
+                <td>{{ affiliation.cin }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ affiliation.age }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ affiliation.email }}</td>
+            </tr>
+            <tr>
+                <th>Idclub</th>
+                <td>{{ affiliation.idclub }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_affiliation_index') }}">back to list</a>
+
+    <a href="{{ path('app_affiliation_edit', {'id': affiliation.id}) }}">edit</a>
+
+    {{ include('affiliation/_delete_form.html.twig') }}
+{% endblock %}
