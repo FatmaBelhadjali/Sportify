@@ -14,6 +14,7 @@ class SportType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->setAttribute('novalidate','novalidate');
         $builder
             ->add('nom')
             ->add('description')

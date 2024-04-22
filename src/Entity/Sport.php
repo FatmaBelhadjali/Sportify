@@ -17,11 +17,10 @@ class Sport
     private ?int $id = null;
     
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    
+    #[Assert\NotBlank(message:"the name cannot be blank")]
     private ?string $nom = null;
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message:"the description cannot be blank")]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
