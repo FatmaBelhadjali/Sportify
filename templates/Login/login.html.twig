@@ -1,0 +1,48 @@
+{% extends 'Home/Front.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <br><br><br><br><br><br><br><br><br><br><br>
+
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6">
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% endif %}
+
+                    <h1 class="h3 mb-3 font-weight-normal text-center">Sign in</h1>
+                    <br>
+                    <div class="mb-3">
+                        <label for="inputPseudo" class="sr-only">Pseudo</label>
+                        <input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control" placeholder="Pseudo" autocomplete="username" required autofocus>
+                    </div>
+                    <br>
+                    <div class="mb-3">
+                        <label for="inputPassword" class="sr-only">Password</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" autocomplete="current-password" required>
+                    </div>
+                    <br>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-6 text-center">
+                <h3 class="mb-0">Don't have an account ?</h3>
+                <a href="{{ path('app_utilisateurs_new') }}" class="btn btn-link">SIGN UP</a>
+            </div>
+        </div>
+    </div>
+        <br><br><br><br><br><br><br><br><br><br><br>
+
+{% endblock %}

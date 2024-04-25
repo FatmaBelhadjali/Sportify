@@ -1,0 +1,81 @@
+  {% extends 'base.html.twig' %} 
+
+
+ {% block body %}
+ <!-- Header -->
+    <header class="site-navbar py-4" role="banner">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <div class="site-logo" style="margin-top: 20px;">
+                    
+                </div>
+
+                <div class="ml-auto">
+                    <nav class="site-navigation position-relative text-right" role="navigation">
+                        <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                            <li class="active"><a href="{{ path("app_sport_indexfront") }}" class="nav-link">SPORTS</a></li>
+                            <li><a href="players.html" class="nav-link">CLUBS</a></li>
+                            <li><a href="players.html" class="nav-link">PRODUCTS</a></li>
+                            <li><a href="blog.html" class="nav-link">EVENTS</a></li>
+                            <li><a href="contact.html" class="nav-link">SPONSORS</a></li>
+                            <li><a href="contact.html" class="nav-link">LOGIN</a></li>
+
+                        </ul>
+                    </nav>
+                    <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right text-white">
+                        <span class="icon-menu h3 text-white"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="site-wrap">
+        <!-- Hero Section -->
+        {% block hero %}
+        <div class="hero overlay" style="background-image: url('{{ asset('/Frontoffice/images/background.jpg') }}'); background-size: cover; position: relative; min-height: 500px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        <h1 style="text-align: center;">Welcome to Sportify Website</h1>
+                        <p style="text-align: center;"><a href="#" class="btn btn-primary">Commencer</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+
+        <!-- Section des sports -->
+        {% block section %}
+        <div class="site-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 title-section">
+                        <h2 class="heading">Videos</h2>
+                    </div>
+                    <div class="col-6 text-right">
+                        <div class="custom-nav">
+                            <a href="#" class="js-custom-prev-v2"><span class="icon-keyboard_arrow_left"></span></a>
+                            <span></span>
+                            <a href="#" class="js-custom-next-v2"><span class="icon-keyboard_arrow_right"></span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="owl-4-slider owl-carousel">
+                    <!-- Mettez ici le code pour les vidéos -->
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+
+        <!-- Footer -->
+        {% block footer %}
+        <footer class="footer-section">
+            <div class="container">
+                <!-- Mettez ici le code pour le footer -->
+            </div>
+        </footer>
+        {% endblock %}
+    </div>
+    {% endblock %}

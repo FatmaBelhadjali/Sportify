@@ -21,7 +21,7 @@ class UtilisateursType extends AbstractType
     {
         $builder
             ->add('pseudo')
-            ->add('mdp', PasswordType::class)
+            
             ->add('nom', TextType::class, [
                 'constraints' => [
                     new NotBlank(),
@@ -84,12 +84,31 @@ class UtilisateursType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('mdp', PasswordType::class, [
+               
+                'attr' => ['autocomplete' => 'new-password'],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a password',
+                    ]),
+                    new Length([
+                        'min' => 8,
+                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'max' => 4096,
+                    ]),
+                ],
+            ])
             ->add('role', ChoiceType::class, [
                 'choices' => [
                     'Client' => 'Client',
                     'Membre' => 'Membre',
-                ]
+                ],
+                'expanded' => true, 
+                'constraints' => [
+                    new NotBlank(),
+                ],
             ])
+
         ;
     }
 
