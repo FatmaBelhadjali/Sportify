@@ -6,18 +6,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
-#[Route('/home')]
 class HomeController extends AbstractController
 {
-    #[Route('/front', name: 'app_home_front')]
-    public function front(): Response
+    
+    #[Route('/front', name: 'app_front')]
+    public function frontend(): Response
     {
         return $this->render('Home/Front.html.twig');
     }
 
-    #[Route('/back', name: 'app_home_back')]
-    public function back(): Response
+    #[Route('/back', name: 'app_back')]
+    public function backend(): Response
     {
         return $this->render('Home/Back.html.twig');
     }
