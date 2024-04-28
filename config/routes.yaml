@@ -1,3 +1,26 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+generate_sports_pdf:
+  path: listS
+  controller:  App\Controller\PdfController::pdf
+  #  Tri nom asc
+terrain_display_sorted_by_nom_asc:
+    path: '/tri/sorted_by_nom_asc'
+    controller: App\Controller\TriController::displaySortedByNomASC
+
+#  Tri type asc
+terrain_display_sorted_by_sport_asc:
+    path: '/tri/sorted_by_sport_asc'
+    controller: App\Controller\TriController::displaySortedBySportASC
+#  Tri nom desc
+terrain_display_sorted_by_nom_desc:
+    path: '/tri/sorted_by_nom_desc'
+    controller: App\Controller\TriController::displaySortedByNomDESC
+
+#  Tri type desc
+terrain_display_sorted_by_sport_desc:
+    path: '/tri/sorted_by_sport_desc'
+    controller: App\Controller\TriController::displaySortedBySportDESC
+
+

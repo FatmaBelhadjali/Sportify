@@ -11,10 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/terrain')]
+
 class TerrainController extends AbstractController
 {
-    #[Route('/', name: 'app_terrain_index', methods: ['GET'])]
+    #[Route('/terrain', name: 'app_terrain_index', methods: ['GET'])]
     public function index(TerrainRepository $terrainRepository): Response
     {
         return $this->render('terrain/index.html.twig', [
@@ -22,7 +22,7 @@ class TerrainController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_terrain_new', methods: ['GET', 'POST'])]
+    #[Route('/terrain/new', name: 'app_terrain_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $terrain = new Terrain();
@@ -42,7 +42,7 @@ class TerrainController extends AbstractController
         ]);
     }
 
-    #[Route('/{idTerrain}', name: 'app_terrain_show', methods: ['GET'])]
+    #[Route('/terrain/{idTerrain}', name: 'app_terrain_show', methods: ['GET'])]
     public function show(Terrain $terrain): Response
     {
         return $this->render('terrain/show.html.twig', [
@@ -50,7 +50,7 @@ class TerrainController extends AbstractController
         ]);
     }
 
-    #[Route('/{idTerrain}/edit', name: 'app_terrain_edit', methods: ['GET', 'POST'])]
+    #[Route('/terrain/{idTerrain}/edit', name: 'app_terrain_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Terrain $terrain, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(TerrainType::class, $terrain);
@@ -68,7 +68,7 @@ class TerrainController extends AbstractController
         ]);
     }
 
-    #[Route('/{idTerrain}', name: 'app_terrain_delete', methods: ['POST'])]
+    #[Route('/terrain/{idTerrain}', name: 'app_terrain_delete', methods: ['POST'])]
     public function delete(Request $request, Terrain $terrain, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$terrain->getIdTerrain(), $request->request->get('_token'))) {
@@ -78,4 +78,42 @@ class TerrainController extends AbstractController
 
         return $this->redirectToRoute('app_terrain_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    public function displaySortedByNomASC()
+    {
+        $terrains = $this->getDoctrine()->getRepository(Terrain::class)->findBy([], ['nomTerrain' => 'ASC']);
+
+        return $this->render('terrain/index.html.twig', [
+            'terrains' => $terrains,
+        ]);
+    }
+
+    public function displaySortedBySportASC()
+    {
+        $terrains = $this->getDoctrine()->getRepository(Terrain::class)->findBy([], ['id' => 'ASC']);
+
+        return $this->render('terrain/index.html.twig', [
+            'terrains' => $terrains,
+        ]);
+    }
+    public function displaySortedByNomDESC()
+    {
+        $terrains = $this->getDoctrine()->getRepository(Terrain::class)->findBy([], ['nomTerrain' => 'DESC']);
+
+        return $this->render('terrain/index.html.twig', [
+            'terrains' => $terrains,
+        ]);
+    }
+
+    public function displaySortedBySportDESC()
+    {
+        $terrains = $this->getDoctrine()->getRepository(Terrain::class)->findBy([], ['id' => 'DESC']);
+
+        return $this->render('terrain/index.html.twig', [
+            'terrains' => $terrains,
+        ]);
+    }
+
+    
 }

@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 
@@ -52,7 +53,29 @@ public function show(Request $request, Sport $sport, TerrainRepository $terrainR
         'terrains' => $terrains,
     ]);
 }
+/*#[Route('/search', name: 'app_sport_search', methods: ['GET'])]
+public function search(Request $request, SportRepository $sportRepository)
+{
+    // Récupérer le terme de recherche à partir de la requête
+    $keyword = $request->query->get('q');
 
+    // Effectuer la recherche dans le repository SportRepository
+    $results = $sportRepository->findByKeyword($keyword);
 
-   
+    // Rendre le template avec les résultats de la recherche
+    return $this->render('sportfront/search.html.twig', [
+        'results' => $results,
+        'keyword' => $keyword,
+    ]);
+}*/
+
+/*#[Route('/search', name: 'app_sport_search')]
+    public function searchUser(Request $request, SportRepository $repository): Response
+    {
+        $query = $request->request->get('query');
+        $sports = $repository->searchByNom($query);
+        return $this->render('sportfront/search.html.twig', [
+            'sports' => $sports
+        ]);
+    } */
 }

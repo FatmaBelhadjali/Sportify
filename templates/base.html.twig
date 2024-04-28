@@ -20,7 +20,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('Backoffice/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/Backoffice/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
 
 </head>
@@ -242,7 +242,7 @@
                 <img class="sidebar-card-illustration mb-2" src="{{ asset('/Backoffice/img/undraw_rocket.svg') }}" alt="...">
 
                 <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+<a class="btn btn-success btn-sm" href="{{ asset('https://startbootstrap.com/theme/sb-admin-pro') }}">Upgrade to Pro!</a>
             </div>
             
 
@@ -250,6 +250,7 @@
         </ul>
         
         <!-- End of Sidebar -->
+        
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -412,7 +413,8 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                        <img class="rounded-circle" src="{{ asset('https://source.unsplash.com/Mv9hjnEUHR4/60x60') }}" alt="Placeholder">
+
                                             alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
@@ -850,15 +852,13 @@
     <script src="{{ asset('/Backoffice/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{ asset('/Backoffice/js/sb-admin-2.min.js') }}"></script>
+    <script src="/Backoffice/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
     <script src="{{ asset('/Backoffice/vendor/chart.js/Chart.min.js') }}"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="{{ asset('/Backoffice/js/demo/chart-pie-demo.js') }}"></script>
 
-    <script src="{{ asset('/Backoffice/js/demo/chart-pie-demo.js') }}"></script>
+    
 
 
 

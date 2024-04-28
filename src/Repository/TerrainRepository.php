@@ -21,6 +21,16 @@ class TerrainRepository extends ServiceEntityRepository
         parent::__construct($registry, Terrain::class);
     }
 
+    public function getStatsByType()
+    {
+        $qb = $this->createQueryBuilder('s')
+        ->select('t.nom as sport, count(s) as count')
+        ->leftJoin('s.sport', 't')
+        ->groupBy('t.id');
+
+    return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Terrain[] Returns an array of Terrain objects
 //     */

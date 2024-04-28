@@ -13,6 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints\File;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 
@@ -21,10 +25,15 @@ use Symfony\Component\Validator\Constraints\File;
 class SportController extends AbstractController
 {
     #[Route('/', name: 'app_sport_index', methods: ['GET'])]
-    public function index(SportRepository $sportRepository): Response
+    public function index(SportRepository $sportRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $sport = $paginator->paginate(
+            $sport=$sportRepository->findAll(),
+            $page = $request->query->getInt('page', 1),
+            2
+        );
         return $this->render('sport/index.html.twig', [
-            'sports' => $sportRepository->findAll(),
+            'sports' => $sport,
         ]);
     }
 
@@ -107,4 +116,35 @@ class SportController extends AbstractController
 
         return $this->redirectToRoute('app_sport_index', [], Response::HTTP_SEE_OTHER);
     }
+    /*#[Route('/search', name: 'search_sport')]
+    public function searchSinistre(Request $request, SportRepository $repository): Response
+    {
+        $query = $request->request->get('query');
+        $sports = $repository->searchByType($query);
+        return $this->render('sport/search.html.twig', [
+            'sports' => $sports
+        ]);
+    }*/
+    
+   /* #[Route('/listS', name: 'generate_sports_pdf', methods: ['GET'])]
+    public function pdf(SportRepository $sportRepository)
+    {
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+    
+        $dompdf = new Dompdf($pdfOptions);
+        $sports = $sportRepository->findAll();
+      
+        $html = $this->renderView('sport/print.html.twig', [
+            'sports' => $sports,
+        ]);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        
+        $dompdf->stream("document.pdf" , ["Attachement" =>false]);
+        
+    }*/
+    
+
 }

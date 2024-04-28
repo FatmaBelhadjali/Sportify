@@ -1,6 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
+<div class="input-group">
+  <div class="col-md-6">
+    <select id="tri" onchange="sortSinistres()" class="form-select">
+    <option value="">Trier les terrains selon ...</option>
+    <option value="{{ path('terrain_display_sorted_by_nom_asc') }}">Nom croissant</option>
+    <option value="{{ path('terrain_display_sorted_by_nom_desc') }}">Nom décroissant</option>
+    <option value="{{ path('terrain_display_sorted_by_sport_asc') }}">Sport croissant</option>
+    <option value="{{ path('terrain_display_sorted_by_sport_desc') }}">Sport décroissant</option>
+</select>
+
+  </div>
+  </div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
@@ -38,10 +50,20 @@
                                 </tbody>
                             </table>
                             <a href="{{ path('app_terrain_new') }}" class="btn btn-success">Create new</a>
+                            <a href="{{ path('app_sport_stat') }}" class="btn btn-success">Statistiques</a>
+
                         {% endblock %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+function sortSinistres() {
+  var select = document.getElementById("tri");
+  var selectedOption = select.options[select.selectedIndex];
+  window.location.href = selectedOption.value;
+}
+
+</script>
 {% endblock %}

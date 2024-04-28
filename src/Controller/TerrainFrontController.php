@@ -10,6 +10,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Ivory\GoogleMap\Helper\Builder\MapHelperBuilder;
+use Ivory\GoogleMap\Helper\MapHelper;
+use App\Entity\Position;
+use Ivory\GoogleMap\Map;
+
+
 
 use App\Entity\Sport;
 
@@ -27,7 +33,7 @@ foreach ($sports as $sport) {
     $terrainsBySport[$sport->getName()] = $terrains;
 }
 
-return $this->render('terrainfront/index.html.twi²g', [
+return $this->render('terrainfront/index.html.twig', [
     'terrainsBySport' => $terrainsBySport,
 ]);
 
