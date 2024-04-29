@@ -31,7 +31,7 @@
 			<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 				{%block Sidebar%}
 				<!-- Sidebar - Brand -->
-				<a class="sidebar-brand d-flex align-items-center justify-content-center"  href="{{path('app_back')}}">
+				<a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{path('app_back')}}">
 					<div class="sidebar-brand-icon rotate-n-15">
 						<img src="/Backoffice/img/logo.png" alt="Logo" style="width: 100px;height: 100px;">
 					</div>
@@ -363,7 +363,7 @@
 										</div>
 										<div class="font-weight-bold">
 											<div class="text-truncate">Hi there! I am wondering if you can help me with a
-												                                            problem I've been having.</div>
+																																																												                                            problem I've been having.</div>
 											<div class="small text-gray-500">Emily Fowler · 58m</div>
 										</div>
 									</a>
@@ -374,7 +374,7 @@
 										</div>
 										<div>
 											<div class="text-truncate">I have the photos that you ordered last month, how
-												                                            would you like them sent to you?</div>
+																																																												                                            would you like them sent to you?</div>
 											<div class="small text-gray-500">Jae Chun · 1d</div>
 										</div>
 									</a>
@@ -385,7 +385,7 @@
 										</div>
 										<div>
 											<div class="text-truncate">Last month's report looks great, I am very happy with
-												                                            the progress so far, keep up the good work!</div>
+																																																												                                            the progress so far, keep up the good work!</div>
 											<div class="small text-gray-500">Morgan Alvarez · 2d</div>
 										</div>
 									</a>
@@ -396,7 +396,7 @@
 										</div>
 										<div>
 											<div class="text-truncate">Am I a good boy? The reason I ask is because someone
-												                                            told me that people say this to all dogs, even if they aren't good...</div>
+																																																												                                            told me that people say this to all dogs, even if they aren't good...</div>
 											<div class="small text-gray-500">Chicken the Dog · 2w</div>
 										</div>
 									</a>
@@ -414,7 +414,7 @@
 								</a>
 								<!-- Dropdown - User Information -->
 								<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-									<a class="dropdown-item" href="#">
+									<a class="dropdown-item" href="{{ path('app_utilisateurs_display', {'id': app.user.id}) }}">
 										<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
 										Profile
 									</a>
@@ -440,189 +440,141 @@
 
 					<body>
 						<div class="main-content">
-        {% block body %}
-            <br>
-            <div class="container">
-                <div class="card" style="height:500px; width:450px; display:inline-block;">
-                    <div class="card-body chart-container">
-                        <h4 class="card-title">Statistiques des Utilisateurs par Rôle</h4>
-                        <canvas id="user-role-chart" height="320" width="320"></canvas>
-                    </div>
-                </div>
-                <div class="card" style="height:500px; width:450px; display:inline-block;">
-                    <div class="card-body chart-container">
-                        <h4 class="card-title">Statistiques des Utilisateurs Vérifiée</h4>
-                        <canvas id="verification-status-chart" height="320" width="320"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="card-white" style="height:600px; width:450px; display:inline-block;">
-                    <div class="card-body chart-container">
-					<br>
-                        <h4 class="card-title">Demandes de réinitialisation de mot de passe</h4>
-                        <canvas id="reset-request-chart" height="320" width="320"></canvas>
-                    </div>
-                </div>
-            </div>
+							{% block body %}
+								<br>
+								<div class="container">
+									<div class="card" style="height:500px; width:450px; display:inline-block;">
+										<div class="card-body chart-container">
+											<h4 class="card-title">Statistiques des Utilisateurs par Rôle</h4>
+											<canvas id="user-role-chart" height="320" width="320"></canvas>
+										</div>
+									</div>
+									<div class="card" style="height:500px; width:450px; display:inline-block;">
+										<div class="card-body chart-container">
+											<h4 class="card-title">Statistiques des Utilisateurs Vérifiée</h4>
+											<canvas id="reset-request-chart" height="320" width="320"></canvas>
+										</div>
+									</div>
+								</div>
+								 <div class="container">
+									<div class="card-white" style="height:600px; width:450px; display:inline-block;">
+										<div class="card-body chart-container">
+											<br>
+											{# <h4 class="card-title">Demandes de réinitialisation de mot de passe</h4> #}
+											<canvas id="verification-status-chart" height="320" width="320"></canvas>
+										</div>
+									</div>
+								</div> 
 
 
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var ctx1 = document.getElementById('user-role-chart').getContext('2d');
-                    var ctx2 = document.getElementById('verification-status-chart').getContext('2d');
-                    var ctx3 = document.getElementById('reset-request-chart').getContext('2d');
-                    var labels = {{ labels|raw }};
-                    var data = {{ data|raw }};
-                    var verificationLabels = {{ verificationLabels|raw }};
-                    var verificationData = {{ verificationData|raw }};
-                    var resetRequestLabels = {{ resetRequestLabels|raw }};
-                    var resetRequestData = {{ resetRequestData|raw }};
+								<script>
+									document.addEventListener('DOMContentLoaded', function () {
+									var ctx1 = document.getElementById('user-role-chart').getContext('2d');
+									var ctx2 = document.getElementById('verification-status-chart').getContext('2d');
+									var ctx3 = document.getElementById('reset-request-chart').getContext('2d');
+									var labels = {{ labels|raw }};
+									var data = {{ data|raw }};
+									var verificationLabels = {{ verificationLabels|raw }};
+									var verificationData = {{ verificationData|raw }};
+									var resetRequestLabels = {{ resetRequestLabels|raw }};
+									var resetRequestData = {{ resetRequestData|raw }};
 
-                    // Chart for users by role
-                    var userRoleChart = new Chart(ctx1, {
-                        type: 'pie',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'Users by Role',
-                                data: data,
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.5)',
-                                    'rgba(54, 162, 235, 0.5)',
-                                    'rgba(255, 206, 86, 0.5)',
-                                    'rgba(75, 192, 192, 0.5)',
-                                    'rgba(153, 102, 255, 0.5)',
-                                    'rgba(255, 159, 64, 0.5)'
-                                ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false
-                        }
-                    });
-
-                    // Chart for verification status
-                    var verificationStatusChart = new Chart(ctx2, {
-                        type: 'pie',
-                        data: {
-                            labels: verificationLabels,
-                            datasets: [{
-                                label: 'Verification Status',
-                                data: verificationData,
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.5)',
-                                    'rgba(54, 162, 235, 0.5)'
-                                ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false
-                        }
-                    });
-
-                    // Chart for reset request by month
-                    var resetRequestChart = new Chart(ctx3, {
-                        type: 'bar',
-                        data: {
-                            labels: resetRequestLabels,
-                            datasets: [{
-                                label: 'Reset Password Requests',
-                                data: resetRequestData,
-                                backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
-                        }
-                    });
-                });
-            </script>
-        {% endblock %}
-    </div>
-
-						</body>
+									// Chart for users by role
+									var userRoleChart = new Chart(ctx1, {
+									type: 'pie',
+									data: {
+									labels: labels,
+									datasets: [
+									{
+									label: 'Users by Role',
+									data: data,
+									backgroundColor: [
+									'rgba(255, 99, 132, 0.5)',
+									'rgba(54, 162, 235, 0.5)',
+									'rgba(255, 206, 86, 0.5)',
+									'rgba(75, 192, 192, 0.5)',
+									'rgba(153, 102, 255, 0.5)',
+									'rgba(255, 159, 64, 0.5)'
+									],
+									borderColor: [
+									'rgba(255, 99, 132, 1)',
+									'rgba(54, 162, 235, 1)',
+									'rgba(255, 206, 86, 1)',
+									'rgba(75, 192, 192, 1)',
+									'rgba(153, 102, 255, 1)',
+									'rgba(255, 159, 64, 1)'
+									],
+									borderWidth: 1
+									}
+									]
+									},
+									options: {
+									responsive: true,
+									maintainAspectRatio: false
+									}
+									});
 
 
-					</div>
-					<!-- /.container-fluid -->
+									// Chart for reset request by month
+									var resetRequestChart = new Chart(ctx3, {
+									type: 'bar',
+									data: {
+									labels: resetRequestLabels,
+									datasets: [
+									{
+									label: 'Reset Password Requests',
+									data: resetRequestData,
+									backgroundColor: 'rgba(54, 162, 235, 0.5)',
+									borderColor: 'rgba(54, 162, 235, 1)',
+									borderWidth: 1
+									}
+									]
+									},
+									options: {
+									responsive: true,
+									maintainAspectRatio: false,
+									scales: {
+									y: {
+									beginAtZero: true
+									}
+									}
+									}
+									});
+									});
+								</script>
+							{% endblock %}
+						</div>
+
+					</body>
+
 
 				</div>
-				<!-- End of Main Content -->
-
-
-				<!-- End of Footer -->
+				<!-- /.container-fluid -->
 
 			</div>
-			{%endblock%}
-			<!-- End of Content Wrapper -->
-		</body>
-	</html>
-</div>
-<!-- End of Page Wrapper -->
+			<!-- End of Main Content -->
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-	<i class="fas fa-angle-up"></i>
-</a>
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
-			</div>
-			<div class="modal-body">Are You Sure You Want To Leave ?</div>
-			<div class="modal-footer">
-				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-				<a class="btn btn-primary" href="{{path('app_logout')}}">Yes</a>
-			</div>
+			<!-- End of Footer -->
+
+		</div>
+		{%endblock%}
+		<!-- End of Content Wrapper -->
+	</body>
+</html></div><!-- End of Page Wrapper --><!-- Scroll to Top Button--><a class="scroll-to-top rounded" href="#page-top">
+<i class="fas fa-angle-up"></i></a><!-- Logout Modal--><div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+			<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+		<div class="modal-body">Are You Sure You Want To Leave ?</div>
+		<div class="modal-footer">
+			<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+			<a class="btn btn-primary" href="{{path('app_logout')}}">Yes</a>
 		</div>
 	</div>
-</div>
-{%endblock%}
-
-<!-- Bootstrap core JavaScript-->
-<script src="/Backoffice/vendor/jquery/jquery.min.js"></script>
-<script src="/Backoffice/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="/Backoffice/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="/Backoffice/js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="/Backoffice/vendor/chart.js/Chart.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="/Backoffice/js/demo/chart-area-demo.js"></script>
-<script src="/Backoffice/js/demo/chart-pie-demo.js"></script></body></html>
+</div></div>{%endblock%}<!-- Bootstrap core JavaScript--><script src="/Backoffice/vendor/jquery/jquery.min.js"></script><script src="/Backoffice/vendor/bootstrap/js/bootstrap.bundle.min.js"></script><!-- Core plugin JavaScript--><script src="/Backoffice/vendor/jquery-easing/jquery.easing.min.js"></script><!-- Custom scripts for all pages--><script src="/Backoffice/js/sb-admin-2.min.js"></script><!-- Page level plugins --><script src="/Backoffice/vendor/chart.js/Chart.min.js"></script><!-- Page level custom scripts --><script src="/Backoffice/js/demo/chart-area-demo.js"></script><script src="/Backoffice/js/demo/chart-pie-demo.js"></script></body></html>

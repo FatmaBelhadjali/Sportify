@@ -8,9 +8,9 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use App\Validator\Constraints\CheckOldPassword;
+
 
 
 class EditPassType extends AbstractType
@@ -24,7 +24,7 @@ class EditPassType extends AbstractType
                     'attr' => [
                         'class' => 'form-control'
                     ],
-                    'label' => 'Password',
+                    'label' => 'New Password',
                     'label_attr' => [
                         'class' => 'form-label mt-4'
                     ]
@@ -42,7 +42,7 @@ class EditPassType extends AbstractType
             ])
             ->add('plainPassword', PasswordType::class, [
                 'attr'=> ['class' => 'form-control'],
-                'label' => 'New Password',
+                'label' => 'Current Password',
                 'label_attr' => ['class' => 'form-label mt-4'],
                 'constraints' => [new NotBlank()]
             ])

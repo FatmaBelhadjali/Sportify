@@ -90,6 +90,7 @@ class UtilisateursController extends AbstractController
             'utilisateur' => $utilisateur,
         ]);
     }
+   
 
     #[Route('/{id}/edit', name: 'app_utilisateurs_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Utilisateurs $utilisateur, EntityManagerInterface $entityManager): Response
@@ -131,8 +132,7 @@ class UtilisateursController extends AbstractController
         if ($frm->isSubmitted() && $frm->isValid()) {
             $em->persist($user);
             $em->flush();
-            return $this->redirectToRoute("app_front");
-        }
+            return $this->render('utilisateurs/display.html.twig');        }
 
         // Si le formulaire n'est pas valide, il sera automatiquement réaffiché avec les erreurs
         return $this->render('utilisateurs/modifier.html.twig', [
