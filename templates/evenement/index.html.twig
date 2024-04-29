@@ -3,6 +3,41 @@
 {% block title %}Evenement index{% endblock %}
 
 {% block body %}
+<style>
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.pagination a {
+    margin: 0 5px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #0056b3;
+}
+
+.pagination .current {
+        margin: 0 5px;
+    padding: 8px 16px;
+    background-color: #1b4c7f;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-top: -7px;
+}
+
+
+</style>
+
     <h1>Evenement index</h1>
 
     <table class="table">
@@ -41,7 +76,10 @@
             </tr>
         {% endfor %}
         </tbody>
+        
     </table>
-
+<div class="pagination">
+    {{ knp_pagination_render(evenements) }}
+</div>
     <a href="{{ path('app_evenement_new') }}">Create new</a>
 {% endblock %}
