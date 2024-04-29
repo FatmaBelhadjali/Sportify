@@ -1,0 +1,37 @@
+{% extends 'home/front.html.twig' %}
+
+{% block title %}Update Password{% endblock %}
+
+{% block body %}
+    <br><br><br><br><br><br><br><br><br><br><br>
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6">
+                <h1 class="text-center">Update Password</h1>
+                {{ form_errors(form) }}
+
+                {{ form_start(form) }}
+                {{ form_row(form._token) }}
+                <div class="mb-3">
+                    {{ form_row(form.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Current Password'}}) }}
+                    <div class="error-message">{{ form_errors(form.plainPassword) }}</div>
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.newPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'New Password'}}) }}
+                    <div class="error-message">{{ form_errors(form.newPassword.first) }}</div>
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.newPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'Confirm New Password'}}) }}
+                    <div class="error-message">{{ form_errors(form.newPassword.second) }}</div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Update Password</button>
+                <div class="col-md-6 text-center" style="margin-left: 150px">
+                    <h3 class="mb-0">Forget your password?</h3>
+                    <a href="{{ path('app_forgot_password_request') }}" class="btn btn-link">Reset Password</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

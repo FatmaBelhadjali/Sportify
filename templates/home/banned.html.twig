@@ -1,0 +1,164 @@
+{% extends 'home/front.html.twig' %}
+
+{% block title %}Sorry you're banned{% endblock %}
+
+{% block Header %}
+    <section class="customizer-box off">
+        <button class="toggler"><i class="fa fa-cog fa-spin"></i></button>
+        <div class="top-box">
+            <h3>Style Switcher</h3>
+        </div><!-- /.top-box -->
+        <div class="customizer-inner ">
+            <div class="content-box">
+                <div class="title">
+                    <h4>Layout Style</h4>
+                </div><!-- /.title -->
+                <div class="content-row">
+                    <div class="content-col col-6">
+                        <a href="#" id="full-box">
+                            <img src="/customizer/img/full-width.jpg" alt="Awesome Image"/>
+                            <p>Fullwidth</p>
+                        </a><!-- /.full-box -->
+                    </div><!-- /.content-col -->
+                    <div class="content-col col-6">
+                        <a href="#" id="boxed">
+                            <img src="/customizer/img/boxed-width.jpg" alt="Awesome Image"/>
+                            <p>Boxed</p>
+                        </a><!-- /.boxed -->
+                    </div><!-- /.content-col -->
+                </div><!-- /.content-row -->
+            </div><!-- /.content-box -->
+            <div class="content-box switcher-box">
+                <div class="title">
+                    <h4>Navigation</h4>
+                </div><!-- /.title -->
+                <div class="content-row">
+                    <div class="content-col col-12">
+                        <p>Sticky</p>
+                        <!-- Rounded switch -->
+                        <label class="switch navigation-switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <p>Static</p>
+                    </div><!-- /.content-col -->
+                </div><!-- /.content-row -->
+            </div><!-- /.content-box -->
+            <div class="content-box">
+                <div class="title">
+                    <h4>Boxed Background</h4>
+                </div><!-- /.title -->
+                <div class="content-row">
+                    <div class="content-col col-3">
+                        <div class="pattern-box skin-pattern-1" data-pattern-name="boxed-pattern-1"></div><!-- /.pattern-box -->
+                    </div><!-- /.content-col -->
+                    <div class="content-col col-3">
+                        <div class="pattern-box skin-pattern-2" data-pattern-name="boxed-pattern-2"></div><!-- /.pattern-box -->
+                    </div><!-- /.content-col -->
+                    <div class="content-col col-3">
+                        <div class="pattern-box skin-pattern-3" data-pattern-name="boxed-pattern-3"></div><!-- /.pattern-box -->
+                    </div><!-- /.content-col -->
+                    <div class="content-col col-3">
+                        <div class="pattern-box skin-pattern-4" data-pattern-name="boxed-pattern-4"></div><!-- /.pattern-box -->
+                    </div><!-- /.content-col -->
+                </div><!-- /.content-row -->
+            </div><!-- /.content-box -->
+            <div class="content-box">
+                <div class="title">
+                    <h4>Color Skins</h4>
+                </div><!-- /.title -->
+                <ul class="content-row" id="styleOptions">
+                    <li class="content-col col-3">
+                        <a href="#" class="skin-box skin-1 color1" data-theme="color1">
+                            <span class="skin-box-inner"></span>
+                        </a>
+                    </li><!-- /.content-col -->
+                    <li class="content-col col-3">
+                        <a href="#" class="skin-box skin-2 color2" data-theme="color2">
+                            <span class="skin-box-inner"></span>
+                        </a>
+                    </li><!-- /.content-col -->
+                    <li class="content-col col-3">
+                        <a href="#" class="skin-box skin-3 color3" data-theme="color3">
+                            <span class="skin-box-inner"></span>
+                        </a>
+                    </li><!-- /.content-col -->
+                    <li class="content-col col-3">
+                        <a href="#" class="skin-box skin-4 color4" data-theme="color4">
+                            <span class="skin-box-inner"></span>
+                        </a>
+                    </li><!-- /.content-col -->
+                </ul><!-- /.content-row -->
+            </div><!-- /.content-box -->
+        </div><!-- /.customizer-inner -->
+    </section><!-- /.customizer-box -->
+
+
+    <header class="header header-v1 has-over-section stricky dark-header ">
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-md-12 col-sm-12 pull-right">
+                        <div class="top-info">
+                            <div class="clearfix">
+                                <ul class="contact-info pull-left">
+                                    <li><span><i class="fc-icon ftc-icon-email"></i> SportifyTn@gmail.com</span></li>
+                                    <li><span><i class="fc-icon ftc-icon-phone-contact"></i> Troll Free: +1 212-212-2376</span></li>
+                                </ul>
+                                <ul class="social pull-right">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-menu-wrapper ">
+            <div class="container">
+                <nav class="navigation clearfix">
+                    <div id="menuzord" class="menuzord">
+                        <a href="index.html" class="menuzord-brand">
+                            <img src="/img/resources/Web.png" alt="Awesome Image" id="skin-logo-img" />
+                        </a>
+
+                        <ul class="menuzord-menu">
+                            {% if app.user %}
+                                <li>
+                                    <a href="#" class="flip-flop-btn"><span>Welcome, {{ app.user.username }}!</span></a>
+                                    <ul class="dropdown">
+                                        <li><a href="{{ path('app_logout') }}">Logout</a></li>
+                                    </ul>
+                                </li>
+                            {% else %}
+                                <li><a href="{{ path('app_login') }}">LOGIN</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div><!-- /.header-menu-wrapper -->
+
+        <div class="search-box collapse" id="search-box">
+            <div class="container">
+                <form action="#">
+                    <input type="text" placeholder="To Search Start Typing...">
+                </form>
+            </div>
+        </div>
+    </header>
+
+{% endblock %}
+{% block body %}
+    <br><br><br><br>
+    <div class="container">
+        <h1>Sorry! you're banned!</h1>
+        <h3>You can contact <a href="mailto:xtratime@contact.tn"> SportifyTn@contact.tn </a>for more informations! </h3>
+        <br><br><br>
+    </div>
+{% endblock %}
+
+

@@ -1,0 +1,16 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+modifier_utilisateur:
+  path: '/utilisateur/modifier/{id}'
+  controller: 'App\Controller\UtilisateursController::modifier'
+  methods: ['GET', 'POST']
+
+app_utilisateurs_display:
+  path: '/utilisateur/{id}'
+  controller: 'App\Controller\UtilisateursController::display'
+  methods: ['GET']
+
+
+
+

@@ -1,0 +1,145 @@
+{# templates/registration/register.html.twig #}
+
+{% extends 'home/front.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="container wrapper">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6">
+                <h1 class="text-center">Register</h1>
+
+                {{ form_start(registrationForm, {'id': 'register-form', 'attr': {'onsubmit': 'toggleRegisterButton();', 'enctype': 'multipart/form-data'}}) }}
+
+                {# Display flash errors if any #}
+                {% for flash_error in app.flashes('verify_email_error') %}
+                    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                {% endfor %}
+
+                {# Display form errors #}
+                {{ form_errors(registrationForm) }}
+                <div class="formWrapper">
+                    <div>
+                        {# Display other form fields #}
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.pseudo, {'attr': {'class': 'form-control', 'placeholder': 'Pseudo'}}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom'}}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Prénom'}}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.age, {'attr': {'class': 'form-control', 'placeholder': 'Age'}}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.numTel, {'attr': {'class': 'form-control', 'placeholder': 'Numéro de téléphone'}}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.cin, {'attr': {'class': 'form-control', 'placeholder': 'CIN'}}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.picture_url, {'label': 'Profile Picture', 'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.plainPassword.first, {'label': 'Password', 'attr': {'class': 'form-control', 'placeholder': 'Password', 'oninput': 'checkPasswordStrength(this.value)'}}) }}
+                            <progress id="password-strength" max="100" value="0"></progress>
+                            <span id="password-strength-text"></span>
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.plainPassword.second, {'label': 'Confirm Password', 'attr': {'class': 'form-control', 'placeholder': 'Confirm Password'}}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.roles) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.agreeTerms) }}
+                        </div>
+                        <br>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.captcha) }}
+                        </div>
+                    </div>    
+                </div>
+
+                <button type="submit" id="register-button" class="btn btn-lg btn-primary btn-block">Register</button>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
+
+    <br><br><br>
+    <script>
+        function checkPasswordStrength(password) {
+            var progressBar = document.getElementById("password-strength");
+            var strengthText = document.getElementById("password-strength-text");
+
+            var strength = 0;
+
+            // Check for lowercase characters
+            if (password.match(/[a-z]+/)) {
+                strength += 1;
+            }
+
+            // Check for uppercase characters
+            if (password.match(/[A-Z]+/)) {
+                strength += 1;
+            }
+
+            // Check for numbers
+            if (password.match(/[0-9]+/)) {
+                strength += 1;
+            }
+
+            // Check for special characters
+            if (password.match(/[$&+,:;=?@#|'<>.^*()%!-]+/)) {
+                strength += 1;
+            }
+
+            // Check for length greater than or equal to 8
+            if (password.length >= 8) {
+                strength += 1;
+            }
+
+            // Adjust the scoring system to match the desired categories
+            if (password.length < 8) {
+                strengthText.innerText = "Very Weak";
+            } else if (strength === 1) {
+                strengthText.innerText = "Very Weak";
+            } else if (strength === 2) {
+                strengthText.innerText = "Weak";
+            } else if (strength === 3) {
+                strengthText.innerText = "Medium";
+            } else if (strength === 4) {
+                strengthText.innerText = "Strong";
+            } else {
+                strengthText.innerText = "Very Strong";
+            }
+            //progressBar.style.borderRadius = 300px;
+            progressBar.value = (strength / 5) * 100;
+        }
+
+        function toggleRegisterButton() {
+            var passwordInput = document.getElementById('registrationForm_plainPassword_first');
+            var confirmPasswordInput = document.getElementById('registrationForm_plainPassword_second');
+
+            var password = passwordInput.value;
+            var confirmPassword = confirmPasswordInput.value;
+
+            var strengthText = document.getElementById("password-strength-text");
+            var strength = getPasswordStrength(password);
+
+            if (strengthText.innerText === "Weak" && password.trim() !== "") {
+                alert("Are you sure to register with this weak password?");
+            }
+        }
+    </script>
+{% endblock %}

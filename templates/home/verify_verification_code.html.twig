@@ -1,0 +1,25 @@
+{# templates/verify_verification_code.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Verify your code{% endblock %}</title>
+</head>
+<body>
+<div>
+    {% block body %}
+        <h1>Verify Your Code</h1>
+        <form method="post">
+            {{ form_start(form) }}
+            {{ form_row(form.verify_verification_code) }}
+            <button type="submit">Verify Code</button>
+            {{ form_end(form) }}
+        </form>
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+    {% endblock %}
+</div>
+</body>
+</html>

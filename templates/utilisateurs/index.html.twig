@@ -1,0 +1,84 @@
+{% extends 'home/back.html.twig' %}
+
+{% block title %}Utilisateurs index{% endblock %}
+
+
+{% block body %}
+    <br><br><br><br>
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #f9f9f9;
+        }
+
+        .table th, .table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #e6e6e6;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+    <div>
+        <h1>Utilisateurs index</h1>
+
+        <form method="GET" action="{{ path('app_utilisateurs_index') }}">
+            <input type="text" name="q" placeholder="Rechercher par pseudo">
+            <button type="submit">Rechercher</button>
+        </form>
+        <br><br><br>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Pseudo</th>
+                    <th>Roles</th>
+                    <th>Cin</th>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Age</th>
+                    <th>NumTel</th>
+                    <th>Email</th>
+                    <th>IsVerified</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for utilisateur in utilisateurs %}
+                <tr>
+                    <td>{{ utilisateur.pseudo }}</td>
+                    <td>{{ utilisateur.roles ? utilisateur.roles|json_encode : '' }}</td>
+                    <td>{{ utilisateur.cin }}</td>
+                    <td>{{ utilisateur.nom }}</td>
+                    <td>{{ utilisateur.prenom }}</td>
+                    <td>{{ utilisateur.age }}</td>
+                    <td>{{ utilisateur.numTel }}</td>
+                    <td>{{ utilisateur.email }}</td>
+                    <td>{{ utilisateur.isVerified ? 'Yes' : 'No' }}</td>
+                    <td>
+                        <a href="{{ path('app_utilisateurs_show', {'id': utilisateur.id}) }}">show</a>
+                        <a href="{{ path('app_utilisateurs_edit', {'id': utilisateur.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="12">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <button><a href="{{ path('app_utilisateurs_new') }}">Create new</a></button>
+    </div>
+{% endblock %}

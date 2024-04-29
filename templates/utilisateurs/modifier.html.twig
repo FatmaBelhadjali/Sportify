@@ -1,0 +1,52 @@
+{% extends 'home/front.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+    <br><br><br><br><br><br><br><br><br><br><br>
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6">
+
+                <h1 class="text-center">Update</h1>
+
+                {{ form_errors(form) }}
+
+                {{ form_start(form) }}
+                <div class="mb-3">
+                    {{ form_row(form.pseudo, {'attr': {'class': 'form-control', 'placeholder': 'Pseudo'}}) }}
+                    <div class="error-message">{{ form_errors(form.pseudo) }}</div>
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom'}}) }}
+                    <div class="error-message">{{ form_errors(form.nom) }}</div>
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Prénom'}}) }}
+                    <div class="error-message">{{ form_errors(form.prenom) }}</div>
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.age, {'attr': {'class': 'form-control', 'placeholder': 'Age'}}) }}
+                    <div class="error-message">{{ form_errors(form.age) }}</div>
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.numTel, {'attr': {'class': 'form-control', 'placeholder': 'Numéro de téléphone'}}) }}
+                    <div class="error-message">{{ form_errors(form.numTel) }}</div>
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+                    <div class="error-message">{{ form_errors(form.email) }}</div>
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.cin, {'attr': {'class': 'form-control', 'placeholder': 'CIN'}}) }}
+                    <div class="error-message">{{ form_errors(form.cin) }}</div>
+                </div>
+
+                <br>
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Update</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}
