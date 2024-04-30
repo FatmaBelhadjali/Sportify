@@ -1,3 +1,21 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+
+app_pdf_generate:
+    path: '/pdf/generate'
+    controller: 'App\Controller\ClubController::generatePdf'
+
+app_excel_generate:
+    path: '/excel/generate'
+    controller: 'App\Controller\ClubController::generateExcel'
+
+weather_current:
+    path: /weather/current
+    controller: App\Controller\WeatherController::getCurrentWeather
+    methods: GET
+    
+
+
+

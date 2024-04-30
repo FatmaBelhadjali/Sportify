@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des clubs</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liste des clubs</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom du Club</th>
+                <th>Catégorie</th>
+                <th>Date de Création</th>
+                <th>Nom du Coach</th>
+                <th>Nombre de Membres</th>
+                <th>Localisation</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for club in clubs %}
+                <tr>
+                    <td>{{ club.nomclub }}</td>
+                    <td>{{ club.categorie }}</td>
+                    <td>{{ club.datecreation }}</td>
+                    <td>{{ club.nomcoach }}</td>
+                    <td>{{ club.nbmembres }}</td>
+                    <td>{{ club.localisation }}</td>
+                    <td>{{ club.descriptionclub }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

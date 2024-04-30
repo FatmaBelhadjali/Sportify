@@ -51,7 +51,7 @@
         <div class="d-flex align-items-center">
           <div class="site-logo">
             <a href="index.html">
-              <img src="/Backoffice/img/logo.png" alt="Logo" style="width: 100px;height: 100px;">
+              <img src="/Backoffice/img/logo.png" alt="Logo" style="width: 200px;height: 200px;">
             </a>
           </div>
           <div class="ml-auto">
@@ -73,12 +73,12 @@
 
     </header>
 
-    <div class="hero overlay" style="background-image: url('images/bg_3.jpg');">
+    <div class="hero overlay" style="background-image: url('/Frontoffice/images/bg_3.jpg');">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-5 mx-auto text-center">
             <h1 class="text-white">Clubs</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, molestias repudiandae pariatur.</p>
+            <h2>The place where you belong.</h2>
           </div>
         </div>
       </div>
@@ -109,6 +109,8 @@
             <h2 class="heading">Our Clubs</h2>
           </div>
           <div class="row">
+
+          
     {% for club in clubs %}
         <div class="col-lg-6 mb-4">
             <div class="bg-light p-4 rounded">
@@ -116,7 +118,7 @@
                     <div class="widget-vs">
                         <div class="bg-light p-4 rounded d-flex align-items-center justify-content-center">
                             <div class="team-1 text-center">
-                                <img src="{{ club.logo }}" alt="Image">
+                                <img src="{{ club.logo }}" alt="Image" style="width: 150px; height: 100px;">
                                 <h3>{{ club.nomclub }}</h3>
                             </div>
                             <div class="team-2 text-center">
@@ -132,20 +134,30 @@
                         <span class="d-block">{{ club.nbmembres }}</span>
                         <strong class="text-primary">{{ club.nomcoach }}</strong>
                     </p>
-                    <p><a href="#">Join</a></p>
+                    <p><a href={{ path('app_affiliation_new') }} class="btn btn-primary">Join</a></p>
                 </div>
             </div>
         </div>
+        
     {% endfor %}
+
+
+    
 
       
 
     
 
-
+<div class="col-lg-5 mx-auto text-center">
+            <div class="pagination">
+    {{ knp_pagination_render(clubs) }}
+</div>
+          </div>
         
 
       </div>
+
+      
     </div>
 
     
@@ -223,6 +235,7 @@
 
         </div>
       </div>
+      
     </footer>
 
 
@@ -247,6 +260,14 @@
 
 
   <script src="js/main.js"></script>
+<!-- Start of LiveChat (www.livechat.com) code -->
+<script>
+    window.__lc = window.__lc || {};
+    window.__lc.license = 17733723;
+    ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.livechatinc.com/tracking.js",t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))
+</script>
+<noscript><a href="https://www.livechat.com/chat-with/17733723/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">Welcome To Sportify</a></noscript>
+<!-- End of LiveChat code -->
 
 </body>
 

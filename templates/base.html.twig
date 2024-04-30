@@ -34,7 +34,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <img src="/Backoffice/img/logo.png" alt="Logo" style="width: 100px;height: 100px;">
+                    <img src="/Backoffice/img/logo.png" alt="Logo" style="width: 100px; height: 100px;">
                 </div>
                 <div class="sidebar-brand-text mx-3">Sportify</div>
             </a>
@@ -172,23 +172,22 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    
+
+                    
+                    
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                     {%block navbar %}
+
+                    <a href="{{ path('app_pdf_generate') }}" class="btn btn-primary">Télécharger PDF</a>
+
+                    
+                
+
+                    <a href="{{ path('app_excel_generate') }}" class="btn btn-primary">Télécharger excel</a>
+
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
@@ -208,6 +207,9 @@
                                             <button class="btn btn-primary" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
                                             </button>
+
+                                            {# Dans votre template Twig #}
+
                                         </div>
                                     </div>
                                 </form>

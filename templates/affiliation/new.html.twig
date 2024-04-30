@@ -4,8 +4,63 @@
 
 {% block body %}
     <h1>Create new Affiliation</h1>
+<div class="container-fluid d-flex flex-column" style="height: calc(100vh - 100px);">
+        <div class="row flex-grow-1">
+            <div class="col-md-6 px-0">
+                <!-- Adjust image source as needed -->
+                <img src="{{ asset('images/426720326_1372231840131743_8892876042752275258_n-66073d40b574e.jpg') }}" class="img-fluid h-100 w-100" alt="Image">
+            </div>
+            <div class="col-md-6">
+                <div class="container mt-5"> 
+                    <h1>Create new Affiliation</h1>
+                    <div class="form-container text-center">
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
-    {{ include('affiliation/_form.html.twig') }}
+                        <div class="form-group">
+                            {{ form_label(form.nom, 'Nom') }}
+                            {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                            <div class="text-danger">{{ form_errors(form.nom) }}</div>
+                        </div>
 
-    <a href="{{ path('app_affiliation_index') }}">back to list</a>
+                        <div class="form-group">
+                            {{ form_label(form.cin, 'Cin') }}
+                            {{ form_widget(form.cin, {'attr': {'class': 'form-control'}}) }}
+                            <div class="text-danger">{{ form_errors(form.cin) }}</div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.age, 'Age') }}
+                            {{ form_widget(form.age, {'attr': {'class': 'form-control'}}) }}
+                            <div class="text-danger">{{ form_errors(form.age) }}</div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.email, 'Email') }}
+                            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                            <div class="text-danger">{{ form_errors(form.email) }}</div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.idclub, 'Club associé') }}
+                            {{ form_widget(form.idclub, {'attr': {'class': 'form-control'}}) }}
+                            <div class="text-danger">{{ form_errors(form.idclub) }}</div>
+                        </div>
+
+                    
+
+                        <div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <a href="{{ path('app_affiliation_index') }}" class="btn btn-secondary">Back to List</a>
+                        </div>
+
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 {% endblock %}
+
+
+

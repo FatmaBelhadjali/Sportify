@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Affiliation Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('/FrontOffice/fonts/icomoon/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('/FrontOffice/css/bootstrap/bootstrap.css') }}">
+  <link rel="stylesheet" href="{{ asset('/FrontOffice/css/style.css') }}">
+</head>
+<body>
+<div class="site-wrap">
+    <header class="site-navbar py-4" role="banner">
+      <div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="site-logo">
+                <a href="index.html">
+                    <img src="/Backoffice/img/logoblanc.png" alt="Logo" style="width: 100px;height: 100px;">
+                </a>
+            </div>
+        </div>
+        
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-lg-4 mx-auto text-center">
+                <h1 class="text-white">Affiliation Form</h1>
+                
+                
+                <form action="/submit-affiliation" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cin">CIN:</label>
+                        <input type="text" id="cin" name="cin" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age:</label>
+                        <input type="number" id="age" name="age" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="club">Club:</label>
+                        <select id="club" name="club" class="form-control" style="color: black;" required>
+                            <option value="Club Africain">Club Africain</option>
+                            <option value="TCT">TCT</option>
+                            <option value="Arena">Arena</option>
+                            <option value="Rades">Rades</option>
+                            <option value="Sakiet zit">Sakiet zit</option>
+                            <option value="HandicapClub">HandicapClub</option>
+                            <option value="Olympica">Olympica</option>
+                            <option value="taraji">taraji</option>
+
+
+                            <!-- Ajoutez d'autres options de club si nécessaire -->
+                        </select>
+                    </div>
+                    <form action="/submit-affiliation" method="POST" id="affiliation-form">
+    <!-- Vos champs de formulaire ici -->
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </header>
+</div>
+
+<script>
+    // Sélectionnez le formulaire par son ID
+    const form = document.getElementById('affiliation-form');
+
+    // Ajoutez un écouteur d'événement pour le soumission du formulaire
+    form.addEventListener('submit', function(event) {
+        // Empêchez le formulaire de se soumettre normalement
+        event.preventDefault();
+
+        // Affichez une alerte
+        alert('Vous avez bien été affilié au club!');
+    });
+</script>
+
+<script src="{{ asset('/FrontOffice/js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('/FrontOffice/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('/FrontOffice/js/main.js') }}"></script>
+</body>
+</html>

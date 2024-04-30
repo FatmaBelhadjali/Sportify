@@ -6,6 +6,8 @@ use App\Entity\Club;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
+
 /**
  * @extends ServiceEntityRepository<Club>
  *
@@ -20,6 +22,42 @@ class ClubRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Club::class);
     }
+
+    public function searchByNom($query): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.nomclub LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllSortedByPrice(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.nomclub', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+/*public function searchByNomclub($query)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.nomclub LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->getQuery()
+            ->getResult();
+    }*/
+
+    public function findAllSortedByName()
+{
+    return $this->createQueryBuilder('c')
+        ->orderBy('c.nomclub', 'ASC') // Trie les clubs par nom en ordre croissant
+        ->getQuery()
+        ->getResult();
+}
+
 
 //    /**
 //     * @return Club[] Returns an array of Club objects

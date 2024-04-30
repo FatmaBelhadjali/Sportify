@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Affiliation
@@ -21,10 +23,19 @@ class Affiliation
      */
     private $id;
 
+    /*#[Assert\NotBlank(message: "Le nom ne peut pas être vide")]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z]+$/',
+        message: "Le nom ne peut contenir que des lettres de l'alphabet"
+    )]*/
+
+
     /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Le nom ne peut pas être vide.")
+     * @Assert\Length(max=200, maxMessage="Le nom du club ne peut pas dépasser {{ limit }} caractères.")
      */
     private $nom;
 
@@ -32,6 +43,8 @@ class Affiliation
      * @var string
      *
      * @ORM\Column(name="cin", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="CIN ne peut pas être vide.")
+     * @Assert\Length(max=8, maxMessage="Le nom du club ne peut pas dépasser {{ limit }} caractères.")
      */
     private $cin;
 
@@ -39,6 +52,10 @@ class Affiliation
      * @var int
      *
      * @ORM\Column(name="age", type="integer", nullable=false)
+     * @Assert\NotBlank(message="L'age ne peut pas être vide.")
+     * @Assert\Length(max=200, maxMessage="Le nom du club ne peut pas dépasser {{ limit }} caractères.")
+     * @Assert\GreaterThanOrEqual(value=18, message="L'âge doit être égal ou supérieur à 18.")
+
      */
     private $age;
 
@@ -46,6 +63,12 @@ class Affiliation
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     * * @Assert\NotBlank(message="L'email ne peut pas être vide.")
+     * @Assert\Length(max=200, maxMessage="L'email du club ne peut pas dépasser {{ limit }} caractères.")
+     * @Assert\Regex(
+ *     pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/",
+ *     message="L'email '{{ value }}' n'a pas une structure valide."
+ * )
      */
     private $email;
 
@@ -53,6 +76,8 @@ class Affiliation
      * @var int
      *
      * @ORM\Column(name="idclub", type="integer", nullable=false)
+     * * @Assert\NotBlank(message="Le club ne peut pas être vide.")
+     * @Assert\Length(max=200, maxMessage="Le nom du club ne peut pas dépasser {{ limit }} caractères.")
      */
     private $idclub;
 

@@ -3,6 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+
 
 /**
  * Club
@@ -21,17 +25,27 @@ class Club
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nomClub", type="string", length=200, nullable=false)
-     */
-    private $nomclub;
+    /*#[Assert\NotBlank(message: "Le nom ne peut pas être vide")]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z]+$/',
+        message: "Le nom ne peut contenir que des lettres de l'alphabet"
+    )]*/
+
+   /**
+ * @var string
+ *
+ * @ORM\Column(name="nomClub", type="string", length=200, nullable=false)
+ * @Assert\NotBlank(message="Le nom du club ne peut pas être vide.")
+ * @Assert\Length(max=200, maxMessage="Le nom du club ne peut pas dépasser {{ limit }} caractères.")
+ */
+private $nomclub;
 
     /**
      * @var string
      *
      * @ORM\Column(name="categorie", type="string", length=200, nullable=false)
+     * * @Assert\NotBlank(message="La categorie du club ne peut pas être vide.")
+     * @Assert\Length(max=200, maxMessage="Le nom du club ne peut pas dépasser {{ limit }} caractères.")
      */
     private $categorie;
 
@@ -39,6 +53,8 @@ class Club
      * @var string
      *
      * @ORM\Column(name="dateCreation", type="string", length=200, nullable=false)
+     * * @Assert\NotBlank(message="La date de création du club ne peut pas être vide.")
+    * @Assert\Length(max=200, maxMessage="Le nom du club ne peut pas dépasser {{ limit }} caractères.")
      */
     private $datecreation;
 
@@ -46,6 +62,8 @@ class Club
      * @var string
      *
      * @ORM\Column(name="nomCoach", type="string", length=200, nullable=false)
+     * * @Assert\NotBlank(message="Le nom du club ne peut pas être vide.")
+     * @Assert\Length(max=10, maxMessage="Le nom du club ne peut pas dépasser 10 caractères.")
      */
     private $nomcoach;
 
@@ -53,6 +71,8 @@ class Club
      * @var int
      *
      * @ORM\Column(name="nbMembres", type="integer", nullable=false)
+     * * @Assert\NotBlank(message="Le nom du coach club ne peut pas être vide.")
+    * @Assert\Length(max=10, maxMessage="Le nom du club ne peut pas dépasser {{ 10 }} caractères.")
      */
     private $nbmembres;
 
@@ -60,6 +80,8 @@ class Club
      * @var string
      *
      * @ORM\Column(name="localisation", type="string", length=255, nullable=false)
+     ** @Assert\NotBlank(message="La localisation du club est obligatoire.")
+    * @Assert\Length(max=200, maxMessage="Le nom du club ne peut pas dépasser {{ limit }} caractères.")
      */
     private $localisation;
 
@@ -67,6 +89,8 @@ class Club
      * @var string
      *
      * @ORM\Column(name="descriptionClub", type="string", length=255, nullable=false)
+     * * @Assert\NotBlank(message="La description du club ne peut pas être vide.")
+    * @Assert\Length(max=200, maxMessage="Le nom du club ne peut pas dépasser {{ limit }} caractères.")
      */
     private $descriptionclub;
 
@@ -92,6 +116,7 @@ class Club
         $this->nomclub = $nomclub;
 
         return $this;
+        
     }
 
     public function getCategorie(): ?string
