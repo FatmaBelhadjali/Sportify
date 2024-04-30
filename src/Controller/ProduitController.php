@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use Dompdf\Dompdf;
 
 use App\Entity\Produit;
 use App\Form\ProduitType;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use App\Service\SmsService;
+use Dompdf\Options as Options;
 
 #[Route('/produit')]
 class ProduitController extends AbstractController
@@ -85,7 +87,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_produit_show', methods: ['GET'])]
+    #[Route('/show/{id}', name: 'app_produit_show', methods: ['GET'])]
     public function show(Produit $produit): Response
     {
         return $this->render('produit/show.html.twig', [
@@ -93,7 +95,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'app_produit_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ProduitType::class, $produit);
@@ -111,7 +113,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_produit_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'app_produit_delete', methods: ['POST'])]
     public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $produit->getId(), $request->request->get('_token'))) {
@@ -121,4 +123,29 @@ class ProduitController extends AbstractController
 
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
     }
+    #[Route('/generatePDF', name: 'generatePDFf'    )]
+    public function generatePDF(Request $request, ProduitRepository $produitRepository): Response
+    {
+        $produits = $produitRepository->findAll();
+    
+    
+        $html=$this->renderView('produit/pdf.html.twig', [
+            'produits' => $produits
+        ]);
+    $pdfOptions=new Options();
+    $dompdf = new Dompdf($pdfOptions);
+
+    $pdfOptions->set('isRemoteEnabled','true');
+    $dompdf->loadHtml($html);
+$dompdf->setPaper('A4', 'landscape');
+    $dompdf->render();
+    $pdfOutput=$dompdf->output();
+    return new Response($pdfOutput,200,[
+        'Content-Type'=>'application/pdf',
+        'Content-Disposition'=>'attachment; filename="produit.pdf'
+    ]);
+
+
+
+}
 }
