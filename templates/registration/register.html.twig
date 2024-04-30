@@ -10,7 +10,7 @@
             <div class="col-md-6">
                 <h1 class="text-center">Register</h1>
 
-                {{ form_start(registrationForm, {'id': 'register-form', 'attr': {'onsubmit': 'toggleRegisterButton();', 'enctype': 'multipart/form-data'}}) }}
+{{ form_start(registrationForm, {'id': 'register-form', 'attr': {'onsubmit': 'toggleRegisterButton();', 'enctype': 'multipart/form-data', 'novalidate': 'novalidate'}}) }}
 
                 {# Display flash errors if any #}
                 {% for flash_error in app.flashes('verify_email_error') %}
