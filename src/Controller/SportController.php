@@ -17,6 +17,8 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Joli\JoliNotif\Notification;
+use Joli\JoliNotif\NotifierFactory;
 
 
 
@@ -68,6 +70,7 @@ class SportController extends AbstractController
             }
     
             // Enregistrer l'entité dans la base de données
+            $this->sendNotification();
             $entityManager->persist($sport);
             $entityManager->flush();
     
@@ -95,10 +98,12 @@ class SportController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->sendNotification();
             $entityManager->flush();
-
             return $this->redirectToRoute('app_sport_index', [], Response::HTTP_SEE_OTHER);
         }
+        
+
 
         return $this->renderForm('sport/edit.html.twig', [
             'sport' => $sport,
@@ -112,6 +117,7 @@ class SportController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$sport->getId(), $request->request->get('_token'))) {
             $entityManager->remove($sport);
             $entityManager->flush();
+
         }
 
         return $this->redirectToRoute('app_sport_index', [], Response::HTTP_SEE_OTHER);
@@ -147,4 +153,19 @@ class SportController extends AbstractController
     }*/
     
 
+    private function sendNotification(): void
+{
+    // Create a notifier
+    $notifier = NotifierFactory::create();
+
+    // Create a notification
+    $notification = (new Notification())
+        ->setTitle('Sportify: Sport modifié')
+        ->setBody('Un sport a été modifié.')
+        ->setIcon(__DIR__.'/assets/img/warning.png');
+
+
+    // Send the notification
+    $notifier->send($notification);
+}
 }

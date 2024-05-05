@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Joli\JoliNotif\Notification;
+use Joli\JoliNotif\NotifierFactory;
 
 
 class TerrainController extends AbstractController
@@ -30,6 +32,7 @@ class TerrainController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->sendNotification();
             $entityManager->persist($terrain);
             $entityManager->flush();
 
@@ -59,6 +62,7 @@ class TerrainController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+
             return $this->redirectToRoute('app_terrain_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -73,6 +77,8 @@ class TerrainController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$terrain->getIdTerrain(), $request->request->get('_token'))) {
             $entityManager->remove($terrain);
+           
+
             $entityManager->flush();
         }
 
@@ -115,5 +121,19 @@ class TerrainController extends AbstractController
         ]);
     }
 
+    private function sendNotification(): void
+    {
+        // Create a notifier
+        $notifier = NotifierFactory::create();
     
+        // Create a notification
+        $notification = (new Notification())
+            ->setTitle('Sportify: Terrain ajouté')
+            ->setBody('Terrain ajouté avec succès.')
+            ->setIcon(__DIR__.'/assets/img/warning.png');
+
+    
+        // Send the notification
+        $notifier->send($notification);
+    }
 }
