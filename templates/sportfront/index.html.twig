@@ -1,0 +1,55 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block section %}
+<div>
+    <label for="search-input">Rechercher un sport : </label>
+    <input type="text" id="search" placeholder="Recherche par nom" >
+</div>
+    <div class="container">
+        <h1 class="my-4">Liste des sports</h1>
+        <div class="row" id="results"> {# Ajoutez l'ID "sports-list" ici #}
+            {% for sport in sports %}
+                <div class="col-md-4 mb-4">
+                    <div id="result" class="card">
+                        {% if sport.image %}
+                            <img src="{{ asset('uploads/images/' ~ sport.image) }}" class="card-img-top" alt="Image du sport {{ sport.nom }}">
+                        {% else %}
+                            <div class="card-img-top" style="height: 200px; background-color: #ccc;"></div>
+                        {% endif %}
+                        <div class="card-body">
+                        <br>
+                            <p class="card-text">{{ sport.nom }}</p>
+                            <p class="card-text">{{ sport.description }}</p>
+                            <a href="{{ path('app_sport_showfront', {'id': sport.id}) }}" class="btn btn-primary">Terrains</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if sports is empty %}
+            <div class="col">
+                <p>Aucun enregistrement trouvé</p>
+            </div>
+        {% endif %}
+        </div>
+        
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#search').keyup(function() {
+            var query = $(this).val();
+            $.ajax({
+                url: "{{ path('app_search_front') }}",
+                type: "POST",
+                data: {query: query},
+                success: function(data) {
+                    $('#results').html(data);
+                    $('#results').css('width', '100%');
+                    $('#results').css('position', 'static');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
+

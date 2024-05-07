@@ -1,0 +1,44 @@
+
+
+{% block content %}
+
+
+
+
+
+<!-- Affichage des clubs -->
+<div id="results" class="row" id="clubsList">
+
+    {% for club in clubs %}
+        <div id= "results" class="col-md-4 mb-4">
+            <div class="card club-card">
+                <div class="card-body">
+                    <h5 class="card-title">ID: {{ club.id }}</h5>
+                    <p class="card-text">Name: {{ club.nomclub }}</p>
+                    <p class="card-text">Category: {{ club.categorie }}</p>
+                    <p class="card-text">Created In: {{ club.datecreation }}</p>
+                    <p class="card-text">Coach Name: {{ club.nomcoach }}</p>
+                    <p class="card-text">Members: {{ club.nbmembres }}</p>
+                    <p class="card-text">Location: {{ club.localisation }}</p>
+                    <p class="card-text">Description: {{ club.descriptionclub }}</p>
+                    <p class="card-text">Logo: {{ club.logo }}</p>
+
+                    <a href="{{ path('app_club_show', {'id': club.id}) }}" class="btn btn-primary show-club">show</a>
+                    <a href="{{ path('app_club_edit', {'id': club.id}) }}" class="btn btn-warning edit-club">edit</a></div>
+
+                    </div>
+            </div>
+        </div>
+    {% else %}
+        <div id="results" class="col-md-12">
+            <p>No records found</p>
+        </div>
+    {% endfor %}
+</div>
+
+
+<div class="pagination">
+    {{ knp_pagination_render(clubs) }}
+</div>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'baseFront.html.twig' %}
+{% block section %}
+<div class="site-section bg-dark">
+      <div class="container">
+        
+        <div class="row mb-5">
+          <div class="col-lg-12">
+            <div class="widget-next-match">
+
+
+              
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 title-section">
+            <h2 class="heading">Our Clubs</h2>
+          </div>
+          <div class="row">
+
+          
+    {% for club in clubs %}
+        <div class="col-lg-6 mb-4">
+            <div class="bg-light p-4 rounded">
+                <div class="widget-body">
+                    <div class="widget-vs">
+                        <div class="bg-light p-4 rounded d-flex align-items-center justify-content-center">
+                            <div class="team-1 text-center">
+                                <img src="{{ club.logo }}" alt="Image" style="width: 150px; height: 100px;">
+                                <h3>{{ club.nomclub }}</h3>
+                            </div>
+                            <div class="team-2 text-center">
+                                <!-- Ajoutez ici les détails de l'autre équipe si nécessaire -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center widget-vs-contents mb-4">
+                    <h4>{{ club.categorie }}</h4>
+                    <p class="mb-5">
+                        <span class="d-block">{{ club.datecreation }}</span>
+                        <span class="d-block">{{ club.nbmembres }}</span>
+                        <strong class="text-primary">{{ club.nomcoach }}</strong>
+                    </p>
+                    <p><a href={{ path('app_affiliation_new') }} class="btn btn-primary">Join</a></p>
+                </div>
+            </div>
+        </div>
+        
+    {% endfor %}
+
+
+    
+
+      
+
+ </div>   
+
+<div class="col-lg-5 mx-auto text-center">
+            <div class="pagination">
+    {{ knp_pagination_render(clubs) }}
+</div>
+          
+        
+
+      </div>
+
+      
+   <div class="row text-center">
+          <div class="col-md-12">
+            <div class=" pt-5">
+              <p>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;
+                <script>
+                  document.write(new Date().getFullYear());
+                </script> All rights reserved | This template is made with <i class="icon-heart"
+                  aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              </p>
+            </div>
+          </div>
+
+        </div>
+         <script src="js/main.js"></script>
+<!-- Start of LiveChat (www.livechat.com) code -->
+<script>
+    window.__lc = window.__lc || {};
+    window.__lc.license = 17733723;
+    ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.livechatinc.com/tracking.js",t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))
+</script>
+<noscript><a href="https://www.livechat.com/chat-with/17733723/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">Welcome To Sportify</a></noscript>
+{% endblock %}

@@ -1,0 +1,18 @@
+
+
+{{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.nom_cat_e) }}
+            {{ form_widget(form.nom_cat_e, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        
+    </div>
+    
+</div>
+
+<button class="btn">{{ button_label|default('Add') }}</button>
+
+{{ form_end(form) }}

@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="input-group">
+  <div class="col-md-6">
+    <select id="tri" onchange="sortSinistres()" class="form-select">
+    <option value="">Trier les terrains selon ...</option>
+    <option value="{{ path('terrain_display_sorted_by_nom_asc') }}">Nom croissant</option>
+    <option value="{{ path('terrain_display_sorted_by_nom_desc') }}">Nom décroissant</option>
+    <option value="{{ path('terrain_display_sorted_by_sport_asc') }}">Sport croissant</option>
+    <option value="{{ path('terrain_display_sorted_by_sport_desc') }}">Sport décroissant</option>
+</select>
+
+  </div>
+  </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">Terrain index</div>
+                    <div class="card-body">
+                        {% block body %}
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>IdTerrain</th>
+                                        <th>Nomterrain</th>
+                                        <th>Localisation</th>
+                                        <th>Taille</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for terrain in terrains %}
+                                        <tr>
+                                            <td>{{ terrain.idTerrain }}</td>
+                                            <td>{{ terrain.nomterrain }}</td>
+                                            <td>{{ terrain.localisation }}</td>
+                                            <td>{{ terrain.taille }}</td>
+                                            <td>
+                                                <a href="{{ path('app_terrain_show', {'idTerrain': terrain.idTerrain}) }}" class="btn btn-primary">Show</a>
+                                                <a href="{{ path('app_terrain_edit', {'idTerrain': terrain.idTerrain}) }}" class="btn btn-warning">Edit</a>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="5">No records found</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <a href="{{ path('app_terrain_new') }}" class="btn btn-success">Create new</a>
+                            <a href="{{ path('app_sport_stat') }}" class="btn btn-success">Statistiques</a>
+
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+function sortSinistres() {
+  var select = document.getElementById("tri");
+  var selectedOption = select.options[select.selectedIndex];
+  window.location.href = selectedOption.value;
+}
+
+</script>
+{% endblock %}

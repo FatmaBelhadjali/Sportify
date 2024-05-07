@@ -6,12 +6,23 @@
 parameters:
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
     profile_picture_directory: '%kernel.project_dir%/public/uploads/profile_pictures'
+    images_directory: '%kernel.project_dir%/public/uploads/images'
+    qrcode_directory: '%kernel.project_dir%/public/qrcode'
 
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    App\Service\QRCodeGenerator:
+        arguments:
+            - '@Endroid\QrCode\Builder\BuilderInterface'
+            - '@Symfony\Component\Filesystem\Filesystem'
+
+    App\Controller\frontOffice\ProduitController:
+        tags: ['container.service_subscriber']
+    
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

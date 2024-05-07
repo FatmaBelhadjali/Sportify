@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sponsor index{% endblock %}
+
+{% block content %}
+    <h1>Sponsor index</h1>
+<form action="{{ path('app_sponsor_index') }}" method="GET">
+    <label for="filter">Filter by Nom:</label>
+    <input type="text" id="filter" name="filter" value="{{ app.request.query.get('filter') }}">
+    <button type="submit">Filter</button>
+</form>
+
+    <table class="table">
+        <thead>
+            <tr>
+<th>
+    <a href="{{ path('app_sponsor_index', {'sort': 'idSponsor', 'order': (currentSort == 'idSponsor' and currentOrder == 'asc') ? 'desc' : 'asc'}) }}">
+        IdentifiantParrain
+    </a>
+</th>
+<th>
+    <a href="{{ path('app_sponsor_index', {'sort': 'nom', 'order': (currentSort == 'nom' and currentOrder == 'asc') ? 'desc' : 'asc'}) }}">
+        Nom
+    </a>
+</th>
+<th>
+    <a href="{{ path('app_sponsor_index', {'sort': 'adresse', 'order': (currentSort == 'adresse' and currentOrder == 'asc') ? 'desc' : 'asc'}) }}">
+        Adresse
+    </a>
+</th>
+<th>
+    <a href="{{ path('app_sponsor_index', {'sort': 'numero', 'order': (currentSort == 'numero' and currentOrder == 'asc') ? 'desc' : 'asc'}) }}">
+        Numéro
+    </a>
+</th>
+                <th>Logo</th>
+                <th>Evenement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sponsor in sponsors %}
+            <tr>
+                <td>{{ sponsor.idSponsor }}</td>
+                <td>{{ sponsor.nom }}</td>
+                <td>{{ sponsor.adresse }}</td>
+                <td>{{ sponsor.numero }}</td>
+                <td>{{ sponsor.logo }}</td>
+                <td>{{ sponsor.evenement }}</td>
+                <td>
+                    <a href="{{ path('app_sponsor_show', {'idSponsor': sponsor.idSponsor}) }}">show</a>
+                    <a href="{{ path('app_sponsor_edit', {'idSponsor': sponsor.idSponsor}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sponsor_new') }}">Create new</a>
+    <br>
+        <a href="{{ path('ShowStatistics') }}">stats</a>
+
+{% endblock %}

@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Invoice</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 20px auto;
+        }
+        .invoice-header h1 {
+            font-size: 32px;
+        }
+        .invoice-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .invoice-info p {
+            margin: 5px 0;
+        }
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .invoice-table th, .invoice-table td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+        }
+        .invoice-table th {
+            background-color: #f8f9fa;
+        }
+        /* Alternate row colors */
+        .invoice-table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .invoice-total {
+            margin-top: 20px;
+            text-align: right;
+        }
+        /* Color for total amount after reduction */
+        .final-amount {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="invoice-header text-center">
+            <h1>Cart Invoice</h1>
+        </div>
+        
+        <div class="invoice-info">
+            <p>Date: 07 MAI 2024</p>
+            <br>
+            <!-- Add more invoice information as needed -->
+        </div>
+        <table class="table table-striped invoice-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Reference</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Size</th>
+                    <th>SubTotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set totalPrice = 0 %}
+                {% for cart in carts %}
+                    <tr>
+                        <td>{{ cart.getidproduct.name }}</td>
+                        <td>{{ cart.getidproduct.reference }}</td>
+                        <td>{{ cart.getidproduct.price }}</td>
+                        <td>{{ cart.quantity }}</td>
+                        <td>{{ cart.size }}</td>
+                        <td>{{ cart.priceTotal }}</td>
+                    </tr>
+                    {% set totalPrice = totalPrice + cart.priceTotal %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="invoice-total">
+            <p>Total Amount: ${{ totalPrice }}</p>
+            <p>Final Amount after reduction: $<span class="final-amount">{{ totalPrice - 100 }}</span></p>
+        </div>
+    </div>
+
+    <!-- JavaScript to get current date -->
+    <script>
+        // Get current date and format it as DD/MM/YYYY
+        window.onload = function() {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+            var yyyy = today.getFullYear();
+            today = dd + '/' + mm + '/' + yyyy;
+
+            // Set the current date in the span with id "currentDate"
+            document.getElementById('currentDate').innerText = today;
+        };
+    </script>
+
+</body>
+</html>
+

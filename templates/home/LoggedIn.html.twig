@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 
 {% block body %}
@@ -12,19 +12,19 @@
 					<nav class="site-navigation position-relative text-right" role="navigation">
 						<ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
 							<li class="active">
-								<a href="" class="nav-link">SPORTS</a>
+								<a href="{{ path("app_sport_indexfront") }}" class="nav-link">SPORTS</a>
 							</li>
 							<li>
-								<a href="players.html" class="nav-link">CLUBS</a>
+								<a href="{{ path('app_club_indexfront') }}" class="nav-link">CLUBS</a>
 							</li>
 							<li>
-								<a href="players.html" class="nav-link">PRODUCTS</a>
+								<a href="{{ path("home_produit") }}" class="nav-link">PRODUCTS</a>
 							</li>
 							<li>
-								<a href="blog.html" class="nav-link">EVENTS</a>
+								<a href="{{ path('app_evenement_indexFront') }}" class="nav-link">EVENTS</a>
 							</li>
 							<li>
-								<a href="contact.html" class="nav-link">SPONSORS</a>
+								<a href="{{ path('app_sponsor_indexfront') }}" class="nav-link">SPONSORS</a>
 							</li>
 							<li class="nav-item dropdown no-arrow">
 								<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

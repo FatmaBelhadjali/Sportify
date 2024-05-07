@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+{% block content %}
+    <h1>Produit index</h1>
+
+    <div class="row">
+        <div class="col">
+            <form action="{{ path('app_produit_index') }}" method="get">
+                <div class="form-group">
+                    <input type="text" name="filter" placeholder="Filter by nom" value="{{ filter }}" class="form-control" id="filter">
+                    <button type="submit" class="btn btn-primary">Apply Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row" id="produit-list">
+        {% for produit in produits %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card">
+                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">
+                        <img src="{{ asset(produit.image) }}" alt="Product Image" class="card-img-top" width="100" height="100">
+                    </a>
+                </div>
+            </div>
+        {% else %}
+            <div class="col">
+                <p>No records found</p>
+            </div>
+        {% endfor %}
+    </div>
+<a href="{{ path('generatePDFf') }}" class="btn btn-primary">Generate PDF</a>
+
+    <a href="{{ path('app_produit_new') }}" class="btn btn-success">Create New</a>
+{% endblock %}
+
+  {% block javascripts %}
+  
+    <script>
+        // Function to send AJAX request on input change
+        function search() {
+            var searchInput = document.getElementById('filter').value.trim();
+            var url = "{{ path('app_produit_index') }}";
+
+            // Send AJAX request
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url + '?filter=' + encodeURIComponent(searchInput), true);
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Update search results container with new content
+                        document.getElementById('produit-list').innerHTML = xhr.responseText;
+                    } else {
+                        console.error('AJAX request failed');
+                    }
+                }
+            };
+
+            xhr.send();
+        }
+
+        // Attach event listener to search input
+        document.getElementById('filter').addEventListener('input', function () {
+            search();
+        });
+
+        // Perform initial search on page load
+        window.addEventListener('load', function () {
+            search();
+        });
+    </script>
+
+
+{% endblock %}

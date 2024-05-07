@@ -1,4 +1,4 @@
-  {% extends 'base.html.twig' %} 
+  {% extends 'base2.html.twig' %} 
 
 
  {% block body %}
@@ -13,11 +13,11 @@
                 <div class="ml-auto">
                     <nav class="site-navigation position-relative text-right" role="navigation">
                         <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                            <li class="active"><a href="" class="nav-link">SPORTS</a></li>
-                            <li><a href="players.html" class="nav-link">CLUBS</a></li>
-                            <li><a href="players.html" class="nav-link">PRODUCTS</a></li>
+                            <li><a href="{{ path("app_sport_indexfront") }}" class="nav-link">SPORTS</a></li>
+                            <li><a href="{{ path('app_club_indexfront') }}" class="nav-link">CLUBS</a></li>
+                            <li><a href="{{ path("home_produit") }}" class="nav-link">PRODUCTS</a></li>
                             <li><a href="blog.html" class="nav-link">EVENTS</a></li>
-                            <li><a href="contact.html" class="nav-link">SPONSORS</a></li>
+                            <li><a href="{{ path('app_sponsor_indexfront') }}" class="nav-link">SPONSORS</a></li>
                             <li><a href="{{ path("app_login") }}" class="nav-link">LOGIN</a></li>
 
                         </ul>

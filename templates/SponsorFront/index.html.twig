@@ -1,0 +1,33 @@
+{% extends 'baseFront.html.twig' %}
+{% block section %}
+<div class="container">
+
+      <div class="row">
+        {% for sponsor in sponsors %}
+        <div class="col-lg-6 mb-4">
+          <div class="bg-light p-4 rounded">
+            <div class="widget-body">
+              <div class="widget-vs">
+                <div class="d-flex align-items-center justify-content-around justify-content-between w-100">
+                  <div class="team-1 text-center">
+                    <img src="{{ sponsor.logo }}" alt="Image">
+                    <h3>{{ sponsor.nom }}</h3>
+                  </div>
+                  <div>
+                    <span class="vs"><span>VS</span></span>
+                  </div>
+                  <div class="team-2 text-center">
+                    <p>{{ sponsor.adresse }}</p>
+                    <p>{{ sponsor.numero }}</p>
+                    <p>{{ sponsor.evenement }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</div>
+    {% endblock %}

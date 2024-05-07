@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Affiliations{% endblock %}
+
+{% block content %}
+    <h1>Affiliations</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Cin</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Idclub</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for affiliation in affiliations %}
+            <tr>
+                <td>{{ affiliation.id }}</td>
+                <td>{{ affiliation.nom }}</td>
+                <td>{{ affiliation.cin }}</td>
+                <td>{{ affiliation.age }}</td>
+                <td>{{ affiliation.email }}</td>
+                <td>{{ affiliation.idclub }}</td>
+                <td>
+                    <a href="{{ path('app_affiliation_show', {'id': affiliation.id}) }}">show</a>
+                    <a href="{{ path('app_affiliation_edit', {'id': affiliation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_affiliation_new') }}">Create new</a>
+{% endblock %}

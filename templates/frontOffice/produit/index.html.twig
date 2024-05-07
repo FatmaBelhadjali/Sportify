@@ -1,0 +1,133 @@
+{% extends 'frontOffice/base.html.twig' %}
+
+{% block head %}
+<head>
+  <title>Soccer &mdash; Website by Colorlib</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href={{asset('frontOffice/fonts/icomoon/style.css')}}>
+
+  <link rel="stylesheet" href={{asset('frontOffice/css/bootstrap/bootstrap.css')}}>
+  <link rel="stylesheet" href={{asset('frontOffice/css/jquery-ui.css')}}>
+  <link rel="stylesheet" href={{asset('frontOffice/css/owl.carousel.min.css')}}>
+  <link rel="stylesheet" href={{asset('frontOffice/css/owl.theme.default.min.css')}}>
+  <link rel="stylesheet" href={{asset('frontOffice/css/owl.theme.default.min.css')}}>
+
+  <link rel="stylesheet" href={{asset('frontOffice/css/jquery.fancybox.min.css')}}>
+
+  <link rel="stylesheet" href={{asset('frontOffice/css/bootstrap-datepicker.css')}}>
+
+  <link rel="stylesheet" href={{asset('frontOffice/fonts/flaticon/font/flaticon.css')}}>
+
+  <link rel="stylesheet" href={{asset('frontOffice/css/aos.css')}}>
+
+  <link rel="stylesheet" href={{asset('frontOffice/css/style.css')}}>
+</head>
+{% endblock %}
+
+{% block header %}
+    <header class="site-navbar py-4" role="banner">
+
+      <div class="container">
+        <div class="d-flex align-items-center">
+          <div class="site-logo">
+            <a href="index.html">
+              <img src="{{asset('frontOffice/images/logo.png')}}" alt="Logo">
+            </a>
+          </div>
+          <div class="ml-auto">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+              <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                <li ><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="matches.html" class="nav-link">Matches</a></li>
+                <li><a href="players.html" class="nav-link">Players</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li class="active"><a href="{{path('home_produit')}}" class="nav-link">Produits</a></li>
+              </ul>
+            </nav>
+
+            <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right text-white"><span
+                class="icon-menu h3 text-white"></span></a>
+          </div>
+        </div>
+      </div>
+
+    </header>
+{% endblock %}
+{% block main %}
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 title-section">
+                    <h2 class="heading">Products</h2>
+                </div>
+            </div>
+            <div class="row">
+                {% for produit in produits %}
+                    <div class="col-lg-6 mb-4">
+                        <div class="bg-light p-4 rounded">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img src="{{ asset(produit.image) }}" alt="{{ produit.nom }}" class="img-fluid">
+                                </div>
+                                <div class="col-md-6">
+                                    <h3>{{ produit.nom }}</h3>
+                                    <p>{{ produit.description }}</p>
+                                    <p>Price: {{ produit.prix }}</p>
+                                    <img src="{{qr[loop.index0]}}" style="margin-left:50%;width:50%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 <a href="{{ path('add_to_cart', {'productId': produit.id}) }}">Add to Cart</a>
+
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    console.log("Script loaded"); // Debugging statement
+
+    const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
+    addToCartButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            console.log("Add to cart button clicked"); // Debugging statement
+
+            const productId = button.getAttribute("data-product-id");
+            console.log("Product ID:", productId); // Debugging statement
+            addToCart(productId);
+        });
+    });
+
+
+});
+function addToCart(productId) {
+    console.log("Adding product to cart:", productId); // Debugging statement
+
+    // Make an AJAX request to your server
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/add_to_cart/" + productId, true); // Include productId in the URL
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            console.log("AJAX request completed"); // Debugging statement
+            if (xhr.status === 200) {
+                console.log("Server response:", xhr.responseText); // Debugging statement
+                // Handle the response from the server if needed
+                const response = JSON.parse(xhr.responseText);
+                console.log(response);
+            } else {
+                console.error("Error:", xhr.status); // Debugging statement
+            }
+        }
+    };
+    xhr.send();
+}</script>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offre index{% endblock %}
+
+
+{% block content %}
+    <h1>Offre index</h1>
+<form action="{{ path('app_offre_index') }}" method="GET">
+    <label for="filter">Filter by Title:</label>
+    <input type="text" id="filter" name="filter" value="{{ app.request.query.get('filter') }}">
+    <button type="submit">Filter</button>
+</form>
+ 
+    <table class="table">
+<thead>
+    <tr>
+        <th><a href="{{ path('app_offre_index', {'sort_by': 'idOffre', 'sort_order': (sortBy == 'idOffre' and sortOrder == 'asc' ? 'desc' : 'asc')}) }}">IdOffre</a></th>
+        <th><a href="{{ path('app_offre_index', {'sort_by': 'titre', 'sort_order': (sortBy == 'titre' and sortOrder == 'asc' ? 'desc' : 'asc')}) }}">Titre</a></th>
+        <th><a href="{{ path('app_offre_index', {'sort_by': 'description', 'sort_order': (sortBy == 'description' and sortOrder == 'asc' ? 'desc' : 'asc')}) }}">Description</a></th>
+        <th><a href="{{ path('app_offre_index', {'sort_by': 'reduction', 'sort_order': (sortBy == 'reduction' and sortOrder == 'asc' ? 'desc' : 'asc')}) }}">Reduction</a></th>
+        <th><a href="{{ path('app_offre_index', {'sort_by': 'produit', 'sort_order': (sortBy == 'produit' and sortOrder == 'asc' ? 'desc' : 'asc')}) }}">Produit</a></th>
+        <th><a href="{{ path('app_offre_index', {'sort_by': 'idSponsor', 'sort_order': (sortBy == 'idSponsor' and sortOrder == 'asc' ? 'desc' : 'asc')}) }}">IdSponsor</a></th>
+        <th>actions</th>
+    </tr>
+</thead>
+
+        <tbody>
+        {% for offre in offres %}
+            <tr>
+                <td>{{ offre.idOffre }}</td>
+                <td>{{ offre.titre }}</td>
+                <td>{{ offre.description }}</td>
+                <td>{{ offre.reduction }}</td>
+                <td>{{ offre.produit }}</td>
+                <td>{{ offre.idSponsor }}</td>
+                <td>
+                    <a href="{{ path('app_offre_show', {'idOffre': offre.idOffre}) }}">show</a>
+                    <a href="{{ path('app_offre_edit', {'idOffre': offre.idOffre}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_offre_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'baseFront.html.twig' %}
+
+
+
+{% block section %}
+    <div class="latest-news">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 title-section">
+            <h2 class="heading">Events</h2>
+          </div>
+        </div>
+        <div class="row no-gutters">
+        {% for evenement in evenements %}
+          <div class="col-md-4">
+            <div class="post-entry">
+              <a href="#">
+                <img src="{{ asset('/Frontoffice/images/img_1.jp') }}g" alt="Image" class="img-fluid">
+              </a>
+              <div class="caption">
+                <div class="caption-inner">
+                  <h3 class="mb-3">{{ evenement[0].nomE }}</h3>
+                  <div class="author d-flex align-items-center">
+                    
+                    <div class="text">
+                      <h4>{{ evenement[0].nbrParticipants - evenement.total  }} places restantes</h4>
+                      <span>{{ evenement[0].dateE }} &bullet; {{ evenement[0].lieu }}</span>
+                    </div>
+                  </div>
+                  <div class="text-center" >
+                  
+                    {% if evenement.isparticipated == 0 %}
+                      <a href="{{ path('app_evenement_participate', {'id':  evenement[0].id }) }}" class="btn btn-primary py-3 px-4 mt-3">Participer</a>
+                    {% else %}
+                      <a href="{{ path('app_evenement_cancel', {'id':  evenement[0].id }) }}" class="btn btn-secondary py-3 px-4 mt-3">Annuler</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div> 
+            </div>
+          </div>
+          {% else %}
+            no records found
+        
+          {% endfor %}
+          
+        </div>
+
+      </div>
+    </div>
+{% endblock %}

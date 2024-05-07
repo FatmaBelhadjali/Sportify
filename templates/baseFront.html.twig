@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Soccer &mdash; Website by Colorlib</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('/Frontoffice/fonts/icomoon/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/Frontoffice/css/bootstrap/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('/Frontoffice/css/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('/Frontoffice/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/Frontoffice/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/Frontoffice/css/jquery.fancybox.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/Frontoffice/css/bootstrap-datepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('/Frontoffice/fonts/flaticon/font/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('/Frontoffice/css/aos.css') }}">
+    <link rel="stylesheet" href="{{ asset('/Frontoffice/css/style.css') }}">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="site-navbar py-4" role="banner">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <div class="site-logo" style="margin-top: 20px;">
+                    <!-- Insérez ici le contenu du logo -->
+                </div>
+
+                <div class="ml-auto">
+                    <nav class="site-navigation position-relative text-right" role="navigation">
+                        <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                            <li><a href="{{ path("app_sport_indexfront") }}" class="nav-link">SPORTS</a></li>
+                            <li><a href="{{ path('app_club_indexfront') }}" class="nav-link">CLUBS</a></li>
+                            <li><a href="{{ path('home_produit') }}" class="nav-link">PRODUCTS</a></li>
+                            <li><a href="{{ path('app_evenement_indexFront') }}" class="nav-link">EVENTS</a></li>
+                            <li><a href="{{ path('app_sponsor_indexfront') }}" class="nav-link">SPONSORS</a></li>
+                            <li class="nav-item dropdown no-arrow">
+								<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="mr-2 d-none d-lg-inline text-gray-800 small">{{ app.user.pseudo }}</span>
+								</a>
+								<!-- Dropdown - User Information -->
+								<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+									<a class="dropdown-item" href="{{ path('app_utilisateurs_display', {'id': app.user.id}) }}">
+										<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+										Profile
+									</a>
+									<a class="dropdown-item" href="#">
+										<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+										Settings
+									</a>
+									<a class="dropdown-item" href="#">
+										<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+										Activity Log
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="{{path('app_logout')}}" data-toggle="modal" data-target="#logoutModal">
+										<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+										Logout
+									</a>
+								</div>
+							</li>
+
+                        </ul>
+                        
+                    </nav>
+                    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Are You Sure You Want To Leave ?</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="{{path('app_logout')}}">Yes</a>
+				</div>
+			</div>
+		</div>
+	</div>
+                    <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right text-white">
+                        <span class="icon-menu h3 text-white"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="site-wrap">
+        <!-- Hero Section -->
+        {% block hero %}
+        <div class="hero overlay" style="background-image: url('{{ asset('/Frontoffice/images/background.jpg') }}'); background-size: cover; position: relative; min-height: 500px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        <h1 style="text-align: center;">Welcome to Sportify Website</h1>
+                        <p style="text-align: center;"><a href="#" class="btn btn-primary">Commencer</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+
+        <!-- Barre de recherche -->
+    
+
+        <!-- Section des sports -->
+        {% block section %}
+        <div class="site-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 title-section">
+                        <h2 class="heading">Videos</h2>
+                    </div>
+                    <div class="col-6 text-right">
+                        <div class="custom-nav">
+                            <a href="#" class="js-custom-prev-v2"><span class="icon-keyboard_arrow_left"></span></a>
+                            <span></span>
+                            <a href="#" class="js-custom-next-v2"><span class="icon-keyboard_arrow_right"></span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="owl-4-slider owl-carousel">
+                    <!-- Mettez ici le code pour les vidéos -->
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    {% block footer %}
+    <footer class="footer-section">
+        <div class="container">
+            <!-- Mettez ici le code pour le footer -->
+        </div>
+    </footer>
+    {% endblock %}
+
+    <!-- Scripts -->
+    
+    <script src="{{ asset('/Frontoffice/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('/Frontoffice/js/jquery-migrate-3.0.1.min.js') }}"></script>
+    <script src="{{ asset('/Frontoffice/js/jquery-ui.js') }}"></script>
+    <script src="{{ asset('/Frontoffice/js/popper.min.js') }}"></script>
+    <script src="{{ asset('/Frontoffice/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('/Frontoffice/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('/Frontoffice/js/jquery.stellar.min.js') }}"></script>
+    <script src="{{ asset('/Frontoffice/js/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('/Frontoffice/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('/Frontoffice/js/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ asset('/Frontoffice/js/aos.js') }}"></script>
+    <script src="{{ asset('/Frontoffice/js/jquery.fancybox.min.js') }}"></script>
+    <script src="{{ asset('/Frontoffice/js/jquery.sticky.js') }}"></script>
+    <script src="{{ asset('/Frontoffice/js/jquery.mb.YTPlayer.min.js') }}"></script>
+    <script src="{{ asset('/Frontoffice/js/main.js') }}"></script>
+    
+    
+
+    {% block javascripts %}
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    {% endblock %}
+
+</body>
+
+</html>

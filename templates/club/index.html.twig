@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clubs{% endblock %}
+
+{% block content %}
+
+<h1>Clubs</h1>
+
+<!-- Formulaire de recherche -->
+<div class="table-responsive">
+<!-- Add this search form at the top of your template -->
+
+    <div class="section-title">
+            <input type="text" id="search" class="form-control" placeholder="Search" oninput="search()">
+        </div>                    
+
+
+        
+    
+</div>
+
+<div id="searchResults"></div>
+
+<button id="sortButton">Sort by Name</button>
+
+
+
+
+
+
+
+<!-- Affichage des clubs -->
+<div id="results" class="row" id="clubsList">
+
+    {% for club in clubs %}
+        <div id= "results" class="col-md-4 mb-4">
+            <div class="card club-card">
+                <div class="card-body">
+                    <h5 class="card-title">ID: {{ club.id }}</h5>
+                    <p class="card-text">Name: {{ club.nomclub }}</p>
+                    <p class="card-text">Category: {{ club.categorie }}</p>
+                    <p class="card-text">Created In: {{ club.datecreation }}</p>
+                    <p class="card-text">Coach Name: {{ club.nomcoach }}</p>
+                    <p class="card-text">Members: {{ club.nbmembres }}</p>
+                    <p class="card-text">Location: {{ club.localisation }}</p>
+                    <p class="card-text">Description: {{ club.descriptionclub }}</p>
+                    <p class="card-text">Logo: {{ club.logo }}</p>
+                        <a href="{{ path('app_club_show', {'id': club.id}) }}" class="btn btn-primary show-club">show</a>
+                    <a href="{{ path('app_club_edit', {'id': club.id}) }}" class="btn btn-warning edit-club">edit</a></div>
+
+            </div>
+        </div>
+    {% else %}
+        <div class="col-md-12">
+            <p>No records found</p>
+        </div>
+    {% endfor %}
+</div>
+
+<a href="{{ path('app_club_new') }}">Create new</a>
+
+<div class="pagination">
+    {{ knp_pagination_render(clubs) }}
+</div>
+
+
+
+
+
+
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#search').keyup(function() {
+            var query = $(this).val();
+            $.ajax({
+                url: "{{ path('app_club_search') }}",
+                type: "POST",
+                data: {query: query},
+                success: function(data) {
+                    $('#results').html(data);
+                    $('#results').css('width', '100%');
+                    $('#results').css('position', 'static');
+                }
+            });
+        });
+    });
+</script>
+
+
+<script>
+// Event listener to trigger sorting by price when the button is clicked
+$('#sortButton').on('click', function() {
+    // Make an AJAX request to reload the page with sorted products
+    window.location.href = '{{ path('app_club_index') }}?sort=nomclub';
+});
+</script>
+{% endblock %}
+
+{% endblock %}
+

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipement{% endblock %}
+
+{% block content %}
+    <h1>Equipement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ equipement.id }}</td>
+            </tr>
+            <tr>
+                <th>Nomequipement</th>
+                <td>{{ equipement.nomequipement }}</td>
+            </tr>
+            <tr>
+                <th>Qteequipement</th>
+                <td>{{ equipement.qteequipement }}</td>
+            </tr>
+            <tr>
+                <th>Imageequipement</th>
+                <td>{{ equipement.imageequipement }}</td>
+            </tr>
+            <tr>
+                <th>ClubId</th>
+                <td>{{ equipement.clubId }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_equipement_index') }}">back to list</a>
+
+    <a href="{{ path('app_equipement_edit', {'id': equipement.id}) }}">edit</a>
+
+    {{ include('equipement/_delete_form.html.twig') }}
+{% endblock %}

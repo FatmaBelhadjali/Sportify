@@ -1,0 +1,27 @@
+{% block content %}
+    <div class="container">
+        <h1 class="my-4">Liste des sports</h1>
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sport in sports %}
+                            <tr>
+                                <td>{{ sport.id }}</td>
+                                <td>{{ sport.nom }}</td>
+                                <td>{{ sport.description }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

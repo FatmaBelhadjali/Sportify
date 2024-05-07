@@ -81,8 +81,8 @@
 					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
 							<h6 class="collapse-header">Gestionner les sports:</h6>
-							<a class="collapse-item" href="">Ajouter</a>
-							<a class="collapse-item" href="">Terrains</a>
+							<a class="collapse-item" href="{{ path('app_sport_new') }}">Ajouter</a>
+							<a class="collapse-item" href="{{ path('app_terrain_new') }}">Terrains</a>
 						</div>
 					</div>
 				</li>
@@ -94,8 +94,9 @@
 					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
 							<h6 class="collapse-header">Gestionner les clubs:</h6>
-							<a class="collapse-item" href="">Ajouter</a>
-							<a class="collapse-item" href="cards.html">Terrains</a>
+							<a class="collapse-item" href="{{ path('app_club_new') }}">Ajouter</a>
+							<a class="collapse-item" href="{{ path('app_equipement_new') }}">Equipement</a>
+							<a class="collapse-item" href="{{ path(app_affiliation_new') }}">Affiliation</a>
 						</div>
 					</div>
 				</li>
@@ -120,8 +121,8 @@
 					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
 							<h6 class="collapse-header">Gestionner les evenements:</h6>
-							<a class="collapse-item" href="">Ajouter</a>
-							<a class="collapse-item" href="cards.html">Terrains</a>
+							<a class="collapse-item" href="{{path('app_evenement_new')}}">Ajouter</a>
+							<a class="collapse-item" href="{{path('app_categorie_evenement_new')}}">Categories</a>
 						</div>
 					</div>
 				</li>
@@ -146,8 +147,8 @@
 					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
 							<h6 class="collapse-header">Gestionner les sponsors:</h6>
-							<a class="collapse-item" href="">Ajouter</a>
-							<a class="collapse-item" href="cards.html">Terrains</a>
+							<a class="collapse-item" href="{{path('app_sponsor_new')}}">Ajouter</a>
+							<a class="collapse-item" href="{{path('app_offre_new')}}">Offre</a>
 						</div>
 					</div>
 				</li>

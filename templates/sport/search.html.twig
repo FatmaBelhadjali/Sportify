@@ -1,0 +1,39 @@
+ {% block content %}
+
+                <table id="results" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sport in sports %}
+                            <tr>
+                                <td>{{ sport.id }}</td>
+                                <td>{{ sport.nom }}</td>
+                                <td>{{ sport.description }}</td>
+                                <td>
+                                    {% if sport.image %}
+                                        <img src="{{ asset('uploads/images/' ~ sport.image) }}" alt="Image du sport {{ sport.nom }}" style="max-width: 100px; max-height: 100px;">
+                                    {% else %}
+                                        Pas d'image associée
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ path('app_sport_show', {'id': sport.id}) }}" class="btn btn-primary btn-sm">Voir</a>
+                                    <a href="{{ path('app_sport_edit', {'id': sport.id}) }}" class="btn btn-success btn-sm">Modifier</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">Aucun enregistrement trouvé</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+        {% endblock %}

@@ -1,0 +1,29 @@
+
+  <div class="row" id="produit-list">
+    <div class="col">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produit in produits %}
+                <tr>
+                    <td><a href="{{ path('app_produit_show', {'id': produit.id}) }}">{{ produit.Nom }}</a></td>
+                    <td>{{ produit.Prix }}</td>
+                    <td>{{ produit.description }}</td>
+                    <td>&nbsp;</td> <!-- Espace entre les colonnes -->
+                    <td>&nbsp;</td> <!-- Espace entre les colonnes -->
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8">No records found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
